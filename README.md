@@ -11,6 +11,8 @@
 -->
 
 [![Project generated with PyScaffold](https://img.shields.io/badge/-PyScaffold-005CA0?logo=pyscaffold)](https://pyscaffold.org/)
+[![Documentation Status](https://readthedocs.org/projects/rat-trig/badge/?version=latest)](https://rat-trig.readthedocs.io/en/latest/?badge=latest)
+[![codecov](https://codecov.io/gh/luk036/rat-trig/graph/badge.svg?token=XBYeRKfy9I)](https://codecov.io/gh/luk036/rat-trig)
 
 # rat-trig
 
