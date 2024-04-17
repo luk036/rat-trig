@@ -9,6 +9,5 @@ pytest
 pytest --cov-report html
 cd docs
 pip install -r .\requirements.txt
-make html 
+make html
 ```
-
