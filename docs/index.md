@@ -2,7 +2,7 @@
 
 Rational Trigonometry
 
-## Note
+## 👉 Note
 
 > This is the main page of your project's [Sphinx] documentation. It is
 > formatted in [Markdown]. Add additional pages by creating md-files in
