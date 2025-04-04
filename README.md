@@ -14,7 +14,7 @@
 [![Documentation Status](https://readthedocs.org/projects/rat-trig/badge/?version=latest)](https://rat-trig.readthedocs.io/en/latest/?badge=latest)
 [![Coverage Status](https://coveralls.io/repos/github/luk036/rat-trig/badge.svg?branch=main)](https://coveralls.io/github/luk036/rat-trig?branch=main)
 
-# 📐 rat-trig
+# 📐 rat-trig (v0.1)
 
 > Rational Trigonometry
 
