@@ -55,8 +55,7 @@ def archimedes(q_1: T, q_2: T, q_3: T) -> T:
         >>> archimedes(q_1, q_2, q_3)
         Fraction(23, 144)
     """
-    temp = q_1 + q_2 - q_3
-    return 4 * q_1 * q_2 - temp * temp
+    return 4 * q_1 * q_2 - (q_1 + q_2 - q_3) ** 2
 
 
 def cross(v_1: list[T], v_2: list[T]) -> T:
@@ -133,7 +132,7 @@ def spread(v_1: list[T], v_2: list[T]) -> T:
         >>> spread(v_1, v_2)
         Fraction(4, 125)
     """
-    return cross(v_1, v_2) ** 2 / (quad(v_1) * quad(v_2))
+    return (v_1[0] * v_2[1] - v_1[1] * v_2[0]) ** 2 / ((v_1[0] ** 2 + v_1[1] ** 2) * (v_2[0] ** 2 + v_2[1] ** 2))
 
 
 def triple_quad_formula(q_1: T, q_2: T, s_3: T) -> T:
