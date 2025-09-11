@@ -23,8 +23,8 @@ rational numbers and operations, rather than irrational numbers and limits, maki
 straightforward and intuitive subject to understand and work with.
 """
 
-from typing import TypeVar
 from fractions import Fraction
+from typing import TypeVar
 
 T = TypeVar("T", int, Fraction, float)
 
@@ -132,7 +132,9 @@ def spread(v_1: list[T], v_2: list[T]) -> T:
         >>> spread(v_1, v_2)
         Fraction(4, 125)
     """
-    return (v_1[0] * v_2[1] - v_1[1] * v_2[0]) ** 2 / ((v_1[0] ** 2 + v_1[1] ** 2) * (v_2[0] ** 2 + v_2[1] ** 2))
+    return (v_1[0] * v_2[1] - v_1[1] * v_2[0]) ** 2 / (
+        (v_1[0] ** 2 + v_1[1] ** 2) * (v_2[0] ** 2 + v_2[1] ** 2)
+    )
 
 
 def triple_quad_formula(q_1: T, q_2: T, s_3: T) -> T:

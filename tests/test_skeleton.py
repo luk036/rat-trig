@@ -1,5 +1,6 @@
-import pytest
 import logging
+
+import pytest
 
 from rat_trig.skeleton import fib, main, parse_args
 

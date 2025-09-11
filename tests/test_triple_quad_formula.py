@@ -1,5 +1,6 @@
-from rat_trig.trigonom import triple_quad_formula
 from fractions import Fraction
+
+from rat_trig.trigonom import triple_quad_formula
 
 
 def test_triple_quad_formula():

@@ -1,5 +1,6 @@
-from rat_trig.trigonom import dot
 from fractions import Fraction
+
+from rat_trig.trigonom import dot
 
 
 def test_dot():

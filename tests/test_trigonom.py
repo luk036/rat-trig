@@ -1,5 +1,6 @@
-from rat_trig.trigonom import archimedes
 from fractions import Fraction
+
+from rat_trig.trigonom import archimedes
 
 
 def test_archimedes():

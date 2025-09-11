@@ -1,5 +1,6 @@
-from rat_trig.trigonom import spread
 from fractions import Fraction
+
+from rat_trig.trigonom import spread
 
 
 def test_spread():

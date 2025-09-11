@@ -1,5 +1,6 @@
-from rat_trig.trigonom import cross
 from fractions import Fraction
+
+from rat_trig.trigonom import cross
 
 
 def test_cross():
