@@ -55,7 +55,8 @@ def archimedes(q_1: T, q_2: T, q_3: T) -> T:
         >>> archimedes(q_1, q_2, q_3)
         Fraction(23, 144)
     """
-    return 4 * q_1 * q_2 - (q_1 + q_2 - q_3) ** 2
+    temp = q_1 + q_2 - q_3
+    return 4 * q_1 * q_2 - temp * temp
 
 
 def cross(v_1: list[T], v_2: list[T]) -> T:
@@ -112,76 +113,7 @@ def quad(v: list[T]) -> T:
         >>> quad(v)
         25
     """
-    return v[0] ** 2 + v[1] ** 2
-
-
-def spread(v_1: list[T], v_2: list[T]) -> T:
-    r"""
-    The `spread` function calculates the spread between two vectors `v_1` and `v_2`.
-
-    :param v_1: A list of two numbers (integers, fractions, or floats).
-    :type v_1: list[T]
-    :param v_2: A list of two numbers (integers, fractions, or floats).
-    :type v_2: list[T]
-    :return: The spread between the two vectors.
-    :rtype: T
-
-    Example:
-        >>> v_1 = [1, 2]
-        >>> v_2 = [3, 4]
-        >>> spread(v_1, v_2)
-        Fraction(4, 125)
-    """
-    return (v_1[0] * v_2[1] - v_1[1] * v_2[0]) ** 2 / (
-        (v_1[0] ** 2 + v_1[1] ** 2) * (v_2[0] ** 2 + v_2[1] ** 2)
-    )
-
-
-def triple_quad_formula(q_1: T, q_2: T, s_3: T) -> T:
-    r"""
-    The `triple_quad_formula` calculates the third quadrance of a triangle given two quadrances
-    and the spread between them.
-
-    :param q_1: The first quadrance.
-    :type q_1: T
-    :param q_2: The second quadrance.
-    :type q_2: T
-    :param s_3: The spread between the two vectors.
-    :type s_3: T
-    :return: The third quadrance.
-    :rtype: T
-
-    Example:
-        >>> q_1 = 5
-        >>> q_2 = 25
-        >>> s_3 = Fraction(4, 125)
-        >>> triple_quad_formula(q_1, q_2, s_3)
-        20.0
-    """
-    return (q_1 + q_2) ** 2 - 4 * q_1 * q_2 * (1 - s_3)
-
-
-def spread_law(q_1: T, q_2: T, q_3: T) -> T:
-    r"""
-    The `spread_law` calculates the spread of a triangle given two quadrances and the third quadrance.
-
-    :param q_1: The first quadrance.
-    :type q_1: T
-    :param q_2: The second quadrance.
-    :type q_2: T
-    :param q_3: The third quadrance.
-    :type q_3: T
-    :return: The spread.
-    :rtype: T
-
-    Example:
-        >>> q_1 = 5
-        >>> q_2 = 25
-        >>> q_3 = 20
-        >>> spread_law(q_1, q_2, q_3)
-        Fraction(1, 1)
-    """
-    return 1 - (q_1 + q_2 - q_3) ** 2 / (4 * q_1 * q_2)
+    return v[0] * v[0] + v[1] * v[1]
 
 
 if __name__ == "__main__":
