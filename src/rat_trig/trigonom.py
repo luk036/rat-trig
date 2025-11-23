@@ -21,6 +21,20 @@ irrational numbers and limits used in traditional trigonometry.
 In summary, Rational Trigonometry is a new approach to classical trigonometry that uses
 rational numbers and operations, rather than irrational numbers and limits, making it a more
 straightforward and intuitive subject to understand and work with.
+
+.. svgbob::
+   :align: center
+
+           A
+           |
+           |
+        q1 |  \\ q3
+           |
+           |
+           B-----C
+             q2
+
+     where q1, q2, q3 are quadrances (squared distances)
 """
 
 from fractions import Fraction
@@ -54,6 +68,18 @@ def archimedes(q_1: T, q_2: T, q_3: T) -> T:
         >>> q_3 = Fraction(1, 6)
         >>> archimedes(q_1, q_2, q_3)
         Fraction(23, 144)
+        
+    .. svgbob::
+       :align: center
+
+           A
+           |\\
+           | \\
+        q1 |  \\\ q3
+           |   \\
+           |    \\
+           B-----C
+             q2
     """
     temp = q_1 + q_2 - q_3
     return 4 * q_1 * q_2 - temp * temp
@@ -75,6 +101,19 @@ def cross(v_1: list[T], v_2: list[T]) -> T:
         >>> v_2 = [3, 4]
         >>> cross(v_1, v_2)
         -2
+
+    .. svgbob::
+       :align: center
+
+            v2
+            ^
+            |
+            |    /
+            |   /
+            |  /
+            | / v1
+            |/____>
+           O
     """
     return v_1[0] * v_2[1] - v_1[1] * v_2[0]
 
@@ -95,6 +134,21 @@ def dot(v_1: list[T], v_2: list[T]) -> T:
         >>> v_2 = [3, 4]
         >>> dot(v_1, v_2)
         11
+        
+    .. svgbob::
+       :align: center
+
+            v2
+            ^ 
+            |\\  
+            | \\ 
+            |  \\ 
+            |   \\  
+            |    \\ v1
+            |     \\ 
+            |      \\
+            |_______\\
+           O         projection
     """
     return v_1[0] * v_2[0] + v_1[1] * v_2[1]
 
@@ -112,6 +166,21 @@ def quad(v: list[T]) -> T:
         >>> v = [3, 4]
         >>> quad(v)
         25
+        
+    .. svgbob::
+       :align: center
+
+           v[1] ^
+                |
+                |\\
+                | \\
+                |  \\\  quad(v) = v[0]^2 + v[1]^2
+                |   \\
+                |    \\
+                |     \\
+                |      \\
+                |_______\\\
+              O         v[0]
     """
     return v[0] * v[0] + v[1] * v[1]
 

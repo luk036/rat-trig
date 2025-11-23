@@ -48,6 +48,12 @@ def fib(n):
 
     Returns:
       int: n-th Fibonacci number
+
+    .. svgbob::
+       :align: center
+
+       F(1)=1  F(2)=1  F(3)=2  F(4)=3  F(5)=5  F(6)=8  ...
+         *     *     **    ***   ***** ******** ...
     """
     assert n > 0
     a, b = 1, 1
