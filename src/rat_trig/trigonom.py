@@ -38,9 +38,10 @@ straightforward and intuitive subject to understand and work with.
 """
 
 from fractions import Fraction
-from typing import TypeVar
+from typing import TypeVar, Union
 
 T = TypeVar("T", int, Fraction, float)
+Numeric = Union[int, Fraction, float]
 
 
 def archimedes(q_1: T, q_2: T, q_3: T) -> T:
@@ -185,7 +186,7 @@ def quad(v: list[T]) -> T:
     return v[0] * v[0] + v[1] * v[1]
 
 
-def spread(v_1: list[T], v_2: list[T]) -> T:
+def spread(v_1: list[T], v_2: list[T]) -> Numeric:
     r"""
     The `spread` function calculates the spread between two vectors `v_1` and `v_2`.
     The spread is the square of the cross product divided by the product of the quadrances.
@@ -196,7 +197,7 @@ def spread(v_1: list[T], v_2: list[T]) -> T:
     :param v_2: A list of two numbers (integers, fractions, or floats).
     :type v_2: list[T]
     :return: The spread between the two vectors.
-    :rtype: T
+    :rtype: Union[int, Fraction, float]
 
     Example:
         >>> from fractions import Fraction
@@ -211,12 +212,12 @@ def spread(v_1: list[T], v_2: list[T]) -> T:
     return (cross_product * cross_product) / (quad_1 * quad_2)
 
 
-def spread_law(q_1: T, q_2: T, q_3: T) -> T:
+def spread_law(q_1: T, q_2: T, q_3: T) -> Numeric:
     r"""
     The `spread_law` function calculates the spread of a triangle using the law of spreads.
     In rational trigonometry, the spread law states that for a triangle with quadrances
     Q1, Q2, Q3, the spread S3 opposite to Q3 can be calculated by:
-    S3 = 4*Q1*Q2 - (Q1 + Q2 - Q3)^2 / (4*Q1*Q2)
+    S3 = 4*Q1*Q2 - (Q1 + Q_2 - Q3)^2 / (4*Q1*Q2)
 
     :param q_1: First quadrance of the triangle
     :type q_1: T
@@ -225,7 +226,7 @@ def spread_law(q_1: T, q_2: T, q_3: T) -> T:
     :param q_3: Third quadrance of the triangle (opposite to the angle whose spread we're finding)
     :type q_3: T
     :return: The spread S3 opposite to the quadrance q_3
-    :rtype: T
+    :rtype: Union[int, Fraction, float]
 
     Example:
         >>> q_1 = 5
