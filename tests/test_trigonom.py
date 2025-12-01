@@ -3,7 +3,7 @@ from fractions import Fraction
 from rat_trig.trigonom import archimedes
 
 
-def test_archimedes():
+def test_archimedes() -> None:
     """Test Archimedes' formula"""
     q_1 = 2
     q_2 = 4

@@ -3,7 +3,7 @@ from fractions import Fraction
 from rat_trig.trigonom import quad
 
 
-def test_quad():
+def test_quad() -> None:
     """Test quadrance"""
     v = [3, 4]
     assert quad(v) == 25

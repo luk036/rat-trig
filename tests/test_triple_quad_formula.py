@@ -3,7 +3,7 @@ from fractions import Fraction
 from rat_trig.trigonom import triple_quad_formula
 
 
-def test_triple_quad_formula():
+def test_triple_quad_formula() -> None:
     """Test triple quad formula"""
     q_1 = 5
     q_2 = 25

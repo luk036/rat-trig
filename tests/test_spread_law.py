@@ -1,7 +1,7 @@
 from rat_trig.trigonom import spread_law
 
 
-def test_spread_law():
+def test_spread_law() -> None:
     """Test spread law"""
     q_1 = 5
     q_2 = 25

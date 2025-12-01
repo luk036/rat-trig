@@ -3,7 +3,7 @@ from fractions import Fraction
 from rat_trig.trigonom import dot
 
 
-def test_dot():
+def test_dot() -> None:
     """Test dot product"""
     v_1 = [1, 2]
     v_2 = [3, 4]

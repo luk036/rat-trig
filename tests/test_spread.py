@@ -3,7 +3,7 @@ from fractions import Fraction
 from rat_trig.trigonom import spread
 
 
-def test_spread():
+def test_spread() -> None:
     """Test spread"""
     v_1 = [Fraction(1), Fraction(2)]
     v_2 = [Fraction(3), Fraction(4)]

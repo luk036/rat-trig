@@ -3,7 +3,7 @@ from fractions import Fraction
 from rat_trig.trigonom import cross
 
 
-def test_cross():
+def test_cross() -> None:
     """Test cross product"""
     v_1 = [1, 2]
     v_2 = [3, 4]
