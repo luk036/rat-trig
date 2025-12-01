@@ -1,3 +1,13 @@
+from .trigonom import (
+    archimedes as archimedes,
+    cross as cross,
+    dot as dot,
+    quad as quad,
+    spread as spread,
+    spread_law as spread_law,
+    triple_quad_formula as triple_quad_formula,
+)
+
 import sys
 
 if sys.version_info[:2] >= (3, 8):
