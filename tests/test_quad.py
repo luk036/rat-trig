@@ -5,20 +5,25 @@ from rat_trig.trigonom import quad
 
 def test_quad() -> None:
     """Test quadrance"""
-    v = [3, 4]
-    assert quad(v) == 25
+    # Test with integer vector
+    v_int = [3, 4]
+    assert quad(v_int) == 25
 
-    v = [3.0, 4.0]
-    assert quad(v) == 25.0
+    # Test with float vector
+    v_float = [3.0, 4.0]
+    assert quad(v_float) == 25.0
 
-    v = [Fraction(3, 5), Fraction(4, 5)]
-    assert quad(v) == 1
+    # Test with Fraction vector
+    v_frac = [Fraction(3, 5), Fraction(4, 5)]
+    assert quad(v_frac) == 1
 
-    v = [1, 1]
-    assert quad(v) == 2
+    # Test with another integer vector
+    v_int2 = [1, 1]
+    assert quad(v_int2) == 2
 
-    v = [0, 0]
-    assert quad(v) == 0
+    # Test with zero vector
+    v_zero = [0, 0]
+    assert quad(v_zero) == 0
 
 
 if __name__ == "__main__":

@@ -38,28 +38,28 @@ straightforward and intuitive subject to understand and work with.
 """
 
 from fractions import Fraction
-from typing import TypeVar, Union
+from typing import TypeVar, Union, Sequence
 
 T = TypeVar("T", int, Fraction, float)
 Numeric = Union[int, Fraction, float]
 
 
-def archimedes(q_1: T, q_2: T, q_3: T) -> T:
+def archimedes(q_1: Numeric, q_2: Numeric, q_3: Numeric) -> Numeric:
     r"""
     The function `archimedes` calculates the qudrea of a triangle using Archimedes' formula with
     the lengths of the three sides `q_1`, `q_2`, and `q_3`. It can also be used to check if a quadraple
     with length Q1, Q2, Q3, Q4 is on a circle.
 
-    :param q_1: The function `archimedes` takes three parameters `q_1`, `q_2`, and `q_3` of type `T` and
-        returns a value of type `T`
-    :type q_1: T
-    :param q_2: The `q_2` parameter in the `archimedes` function represents a value of type `T`. It is
+    :param q_1: The function `archimedes` takes three parameters `q_1`, `q_2`, and `q_3` of type `Numeric` and
+        returns a value of type `Numeric`
+    :type q_1: Numeric
+    :param q_2: The `q_2` parameter in the `archimedes` function represents a value of type `Numeric`. It is
         one of the input parameters along with `q_1` and `q_3`. The function performs a calculation using
-        these parameters and returns a result of type `T`
-    :type q_2: T
+        these parameters and returns a result of type `Numeric`
+    :type q_2: Numeric
     :param q_3: The function `archimedes` takes three parameters `q_1`, `q_2`, and `q_3`, all of type
-        `T`. It then calculates a value based on these parameters and returns the result
-    :type q_3: T
+        `Numeric`. It then calculates a value based on these parameters and returns the result
+    :type q_3: Numeric
     :return: the result of the expression \(4 \times q_1 \times q_2 - \text{temp}^2\), where
         \(\text{temp} = q_1 + q_2 - q_3\).
 
@@ -69,7 +69,7 @@ def archimedes(q_1: T, q_2: T, q_3: T) -> T:
         >>> q_3 = Fraction(1, 6)
         >>> archimedes(q_1, q_2, q_3)
         Fraction(23, 144)
-        
+
     .. svgbob::
        :align: center
 
@@ -86,16 +86,16 @@ def archimedes(q_1: T, q_2: T, q_3: T) -> T:
     return 4 * q_1 * q_2 - temp * temp
 
 
-def cross(v_1: list[T], v_2: list[T]) -> T:
+def cross(v_1: Sequence[Numeric], v_2: Sequence[Numeric]) -> Numeric:
     r"""
     The `cross` function calculates the cross product of two vectors `v_1` and `v_2`.
 
-    :param v_1: A list of two numbers (integers, fractions, or floats).
-    :type v_1: list[T]
-    :param v_2: A list of two numbers (integers, fractions, or floats).
-    :type v_2: list[T]
+    :param v_1: A sequence of two numbers (integers, fractions, or floats).
+    :type v_1: Sequence[Numeric]
+    :param v_2: A sequence of two numbers (integers, fractions, or floats).
+    :type v_2: Sequence[Numeric]
     :return: The cross product of the two vectors.
-    :rtype: T
+    :rtype: Numeric
 
     Example:
         >>> v_1 = [1, 2]
@@ -119,34 +119,34 @@ def cross(v_1: list[T], v_2: list[T]) -> T:
     return v_1[0] * v_2[1] - v_1[1] * v_2[0]
 
 
-def dot(v_1: list[T], v_2: list[T]) -> T:
+def dot(v_1: Sequence[Numeric], v_2: Sequence[Numeric]) -> Numeric:
     r"""
     The `dot` function calculates the dot product of two vectors `v_1` and `v_2`.
 
-    :param v_1: A list of two numbers (integers, fractions, or floats).
-    :type v_1: list[T]
-    :param v_2: A list of two numbers (integers, fractions, or floats).
-    :type v_2: list[T]
+    :param v_1: A sequence of two numbers (integers, fractions, or floats).
+    :type v_1: Sequence[Numeric]
+    :param v_2: A sequence of two numbers (integers, fractions, or floats).
+    :type v_2: Sequence[Numeric]
     :return: The dot product of the two vectors.
-    :rtype: T
+    :rtype: Numeric
 
     Example:
         >>> v_1 = [1, 2]
         >>> v_2 = [3, 4]
         >>> dot(v_1, v_2)
         11
-        
+
     .. svgbob::
        :align: center
 
             v2
-            ^ 
-            |\\  
-            | \\ 
-            |  \\ 
-            |   \\  
+            ^
+            |\\
+            | \\
+            |  \\
+            |   \\
             |    \\ v1
-            |     \\ 
+            |     \\
             |      \\
             |_______\\
            O         projection
@@ -154,20 +154,20 @@ def dot(v_1: list[T], v_2: list[T]) -> T:
     return v_1[0] * v_2[0] + v_1[1] * v_2[1]
 
 
-def quad(v: list[T]) -> T:
+def quad(v: Sequence[Numeric]) -> Numeric:
     r"""
     The `quad` function calculates the quadrance of a vector `v`.
 
-    :param v: A list of two numbers (integers, fractions, or floats).
-    :type v: list[T]
+    :param v: A sequence of two numbers (integers, fractions, or floats).
+    :type v: Sequence[Numeric]
     :return: The quadrance of the vector.
-    :rtype: T
+    :rtype: Numeric
 
     Example:
         >>> v = [3, 4]
         >>> quad(v)
         25
-        
+
     .. svgbob::
        :align: center
 
@@ -186,18 +186,18 @@ def quad(v: list[T]) -> T:
     return v[0] * v[0] + v[1] * v[1]
 
 
-def spread(v_1: list[T], v_2: list[T]) -> Numeric:
+def spread(v_1: Sequence[Numeric], v_2: Sequence[Numeric]) -> Numeric:
     r"""
     The `spread` function calculates the spread between two vectors `v_1` and `v_2`.
     The spread is the square of the cross product divided by the product of the quadrances.
     It represents the square of the sine of the angle between the vectors.
 
-    :param v_1: A list of two numbers (integers, fractions, or floats).
-    :type v_1: list[T]
-    :param v_2: A list of two numbers (integers, fractions, or floats).
-    :type v_2: list[T]
+    :param v_1: A sequence of two numbers (integers, fractions, or floats).
+    :type v_1: Sequence[Numeric]
+    :param v_2: A sequence of two numbers (integers, fractions, or floats).
+    :type v_2: Sequence[Numeric]
     :return: The spread between the two vectors.
-    :rtype: Union[int, Fraction, float]
+    :rtype: Numeric
 
     Example:
         >>> from fractions import Fraction
@@ -212,7 +212,7 @@ def spread(v_1: list[T], v_2: list[T]) -> Numeric:
     return (cross_product * cross_product) / (quad_1 * quad_2)
 
 
-def spread_law(q_1: T, q_2: T, q_3: T) -> Numeric:
+def spread_law(q_1: Numeric, q_2: Numeric, q_3: Numeric) -> Numeric:
     r"""
     The `spread_law` function calculates the spread of a triangle using the law of spreads.
     In rational trigonometry, the spread law states that for a triangle with quadrances
@@ -220,13 +220,13 @@ def spread_law(q_1: T, q_2: T, q_3: T) -> Numeric:
     S3 = 4*Q1*Q2 - (Q1 + Q_2 - Q3)^2 / (4*Q1*Q2)
 
     :param q_1: First quadrance of the triangle
-    :type q_1: T
+    :type q_1: Numeric
     :param q_2: Second quadrance of the triangle
-    :type q_2: T
+    :type q_2: Numeric
     :param q_3: Third quadrance of the triangle (opposite to the angle whose spread we're finding)
-    :type q_3: T
+    :type q_3: Numeric
     :return: The spread S3 opposite to the quadrance q_3
-    :rtype: Union[int, Fraction, float]
+    :rtype: Numeric
 
     Example:
         >>> q_1 = 5
@@ -240,20 +240,20 @@ def spread_law(q_1: T, q_2: T, q_3: T) -> Numeric:
     return numerator / denominator
 
 
-def triple_quad_formula(q_1: T, q_2: T, s_3: T) -> T:
+def triple_quad_formula(q_1: Numeric, q_2: Numeric, s_3: Numeric) -> Numeric:
     r"""
     The `triple_quad_formula` function calculates a value based on two quadrances and a spread.
     In rational trigonometry, this formula is related to the relationship between three quadrances
     and the spread between them.
 
     :param q_1: First quadrance
-    :type q_1: T
+    :type q_1: Numeric
     :param q_2: Second quadrance
-    :type q_2: T
+    :type q_2: Numeric
     :param s_3: Spread value
-    :type s_3: T
+    :type s_3: Numeric
     :return: A calculated value using the triple quad formula
-    :rtype: T
+    :rtype: Numeric
 
     Example:
         >>> from fractions import Fraction
