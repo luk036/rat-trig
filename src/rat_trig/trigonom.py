@@ -69,7 +69,7 @@ def archimedes(q_1: T, q_2: T, q_3: T) -> T:
         >>> q_3 = Fraction(1, 6)
         >>> archimedes(q_1, q_2, q_3)
         Fraction(23, 144)
-        
+
     .. svgbob::
        :align: center
 
@@ -135,18 +135,18 @@ def dot(v_1: list[T], v_2: list[T]) -> T:
         >>> v_2 = [3, 4]
         >>> dot(v_1, v_2)
         11
-        
+
     .. svgbob::
        :align: center
 
             v2
-            ^ 
-            |\\  
-            | \\ 
-            |  \\ 
-            |   \\  
+            ^
+            |\\
+            | \\
+            |  \\
+            |   \\
             |    \\ v1
-            |     \\ 
+            |     \\
             |      \\
             |_______\\
            O         projection
@@ -167,7 +167,7 @@ def quad(v: list[T]) -> T:
         >>> v = [3, 4]
         >>> quad(v)
         25
-        
+
     .. svgbob::
        :align: center
 
