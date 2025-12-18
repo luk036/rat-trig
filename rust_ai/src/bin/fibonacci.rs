@@ -53,11 +53,11 @@ fn fib(n: u64) -> u64 {
 struct Args {
     /// n-th Fibonacci number
     n: u64,
-    
+
     /// Set loglevel to INFO
     #[arg(short = 'v', long = "verbose", action = clap::ArgAction::SetTrue)]
     verbose: bool,
-    
+
     /// Set loglevel to DEBUG
     #[arg(short = 'V', long = "very-verbose", action = clap::ArgAction::SetTrue)]
     very_verbose: bool,
@@ -65,7 +65,7 @@ struct Args {
 
 fn main() {
     let args = Args::parse();
-    
+
     // Set log level based on verbosity
     let log_level = if args.very_verbose {
         log::Level::Debug
@@ -74,17 +74,17 @@ fn main() {
     } else {
         log::Level::Error
     };
-    
+
     // Simple logging setup
     env_logger::Builder::new()
         .filter_level(log_level.to_level_filter())
         .init();
-    
+
     log::debug!("Starting crazy calculations...");
-    
+
     let result = fib(args.n);
     println!("The {}-th Fibonacci number is {}", args.n, result);
-    
+
     log::info!("Script ends here");
 }
 
@@ -105,7 +105,7 @@ mod tests {
         assert_eq!(fib(9), 34);
         assert_eq!(fib(10), 55);
     }
-    
+
     #[test]
     #[should_panic]
     fn test_fib_zero() {

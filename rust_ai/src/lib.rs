@@ -40,13 +40,7 @@ use std::ops::{Add, Mul, Sub};
 /// A numeric type that can be used in rational trigonometry calculations.
 /// Supports integers, rational numbers (fractions), and floating-point numbers.
 pub trait Numeric:
-    Num
-    + Copy
-    + PartialOrd
-    + Add<Output = Self>
-    + Sub<Output = Self>
-    + Mul<Output = Self>
-    + From<i32>
+    Num + Copy + PartialOrd + Add<Output = Self> + Sub<Output = Self> + Mul<Output = Self> + From<i32>
 {
 }
 impl<T> Numeric for T where
@@ -265,9 +259,9 @@ pub fn spread<T: Numeric>(v_1: Vector2<T>, v_2: Vector2<T>) -> T {
 /// ```
 /// use rat_trig::spread_law;
 ///
-/// let q_1 = 5;
-/// let q_2 = 25;
-/// let q_3 = 20;
+/// let q_1 = 5.0;
+/// let q_2 = 25.0;
+/// let q_3 = 20.0;
 /// assert_eq!(spread_law(q_1, q_2, q_3), 0.8);
 /// ```
 pub fn spread_law<T: Numeric>(q_1: T, q_2: T, q_3: T) -> T {
@@ -296,10 +290,10 @@ pub fn spread_law<T: Numeric>(q_1: T, q_2: T, q_3: T) -> T {
 /// use rat_trig::triple_quad_formula;
 /// use num_rational::Ratio;
 ///
-/// let q_1 = 5;
-/// let q_2 = 25;
+/// let q_1 = Ratio::new(5, 1);
+/// let q_2 = Ratio::new(25, 1);
 /// let s_3 = Ratio::new(4, 125);
-/// assert_eq!(triple_quad_formula(q_1, q_2, s_3), 416);
+/// assert_eq!(triple_quad_formula(q_1, q_2, s_3), Ratio::new(416, 1));
 /// ```
 pub fn triple_quad_formula<T: Numeric>(q_1: T, q_2: T, s_3: T) -> T {
     // Formula: (q_1 + q_2)^2 - 4*q_1*q_2*(1-s_3)
@@ -330,7 +324,10 @@ mod tests {
         let q_1_frac = Ratio::new(1, 2);
         let q_2_frac = Ratio::new(1, 4);
         let q_3_frac = Ratio::new(1, 6);
-        assert_eq!(archimedes(q_1_frac, q_2_frac, q_3_frac), Ratio::new(23, 144));
+        assert_eq!(
+            archimedes(q_1_frac, q_2_frac, q_3_frac),
+            Ratio::new(23, 144)
+        );
 
         // Test with zero quadrance
         let q_1_zero = 0;
@@ -348,7 +345,10 @@ mod tests {
         let q_1_mixed = Ratio::new(1, 1);
         let q_2_mixed = Ratio::new(1, 2);
         let q_3_mixed = Ratio::new(2, 1);
-        assert_eq!(archimedes(q_1_mixed, q_2_mixed, q_3_mixed), Ratio::new(7, 4));
+        assert_eq!(
+            archimedes(q_1_mixed, q_2_mixed, q_3_mixed),
+            Ratio::new(7, 4)
+        );
 
         // Test with negative inputs
         let q_1_neg = -1;
@@ -488,7 +488,10 @@ mod tests {
         let q_1_case1 = Ratio::new(5, 1);
         let q_2_case1 = Ratio::new(25, 1);
         let s_3_case1 = Ratio::new(4, 125);
-        assert_eq!(triple_quad_formula(q_1_case1, q_2_case1, s_3_case1), Ratio::new(416, 1));
+        assert_eq!(
+            triple_quad_formula(q_1_case1, q_2_case1, s_3_case1),
+            Ratio::new(416, 1)
+        );
 
         // Test with int, int, int (s_3 = 1)
         let q_1_case2 = 1;
@@ -559,7 +562,7 @@ mod fib_tests {
         assert_eq!(fib(9), 34);
         assert_eq!(fib(10), 55);
     }
-    
+
     #[test]
     #[should_panic]
     fn test_fib_zero() {
