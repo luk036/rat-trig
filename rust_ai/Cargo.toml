@@ -1,0 +1,19 @@
+[package]
+name = "rat-trig"
+version = "0.1.0"
+edition = "2024"
+description = "Rational Trigonometry - A Rust implementation of Norman Wildberger's rational trigonometry"
+authors = ["Wai-Shing Luk <luk036@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/luk036/rat-trig"
+readme = "README.md"
+
+[dependencies]
+num-rational = "0.4"
+num-traits = "0.2"
+clap = { version = "4.0", features = ["derive"] }
+env_logger = "0.11"
+log = "0.4"
+
+[dev-dependencies]
+anyhow = "1.0"
