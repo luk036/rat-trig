@@ -41,11 +41,11 @@ _logger = logging.getLogger(__name__)
 # when using this Python module as a library.
 
 
-def fib(n: int) -> int:
+def fib(number: int) -> int:
     """Fibonacci example function
 
     Args:
-      n (int): integer
+      number (int): integer
 
     Returns:
       int: n-th Fibonacci number
@@ -56,11 +56,11 @@ def fib(n: int) -> int:
        F(1)=1  F(2)=1  F(3)=2  F(4)=3  F(5)=5  F(6)=8  ...
          *     *     **    ***   ***** ******** ...
     """
-    assert n > 0
-    a, b = 1, 1
-    for _i in range(n - 1):
-        a, b = b, a + b
-    return a
+    assert number > 0
+    first, second = 1, 1
+    for _idx in range(number - 1):
+        first, second = second, first + second
+    return first
 
 
 # ---- CLI ----
@@ -85,7 +85,7 @@ def parse_args(args: List[str]) -> argparse.Namespace:
         action="version",
         version=f"rat-trig {__version__}",
     )
-    parser.add_argument(dest="n", help="n-th Fibonacci number", type=int, metavar="INT")
+    parser.add_argument(dest="number", help="n-th Fibonacci number", type=int, metavar="INT")
     parser.add_argument(
         "-v",
         "--verbose",
@@ -130,7 +130,7 @@ def main(args: List[str]) -> None:
     parsed_args = parse_args(args)
     setup_logging(parsed_args.loglevel)
     _logger.debug("Starting crazy calculations...")
-    print(f"The {parsed_args.n}-th Fibonacci number is {fib(parsed_args.n)}")
+    print(f"The {parsed_args.number}-th Fibonacci number is {fib(parsed_args.number)}")
     _logger.info("Script ends here")
 
 

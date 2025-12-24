@@ -25,40 +25,40 @@
  * @param verbose Reference to store verbose flag
  * @param very_verbose Reference to store very verbose flag
  * 
- * @return The n value for Fibonacci calculation, or 0 if error
+ * @return The number value for Fibonacci calculation, or 0 if error
  */
 unsigned long long parse_args(int argc, char* argv[], bool& verbose, bool& very_verbose) {
     verbose = false;
     very_verbose = false;
-    unsigned long long n = 0;
+    unsigned long long number = 0;
     
     if (argc < 2) {
-        std::cerr << "Usage: " << argv[0] << " <n> [-v] [-V]\n";
-        std::cerr << "  n: n-th Fibonacci number\n";
+        std::cerr << "Usage: " << argv[0] << " <number> [-v] [-V]\n";
+        std::cerr << "  number: n-th Fibonacci number\n";
         std::cerr << "  -v: verbose output\n";
         std::cerr << "  -V: very verbose output\n";
         return 0;
     }
     
     // Parse all arguments
-    for (int i = 1; i < argc; ++i) {
-        std::string arg = argv[i];
+    for (int idx = 1; idx < argc; ++idx) {
+        std::string arg = argv[idx];
         
         if (arg == "-v") {
             verbose = true;
         } else if (arg == "-V") {
             very_verbose = true;
         } else if (arg[0] != '-') {
-            // This should be the n value
-            if (n != 0) {
-                std::cerr << "Error: Multiple n values specified\n";
+            // This should be the number value
+            if (number != 0) {
+                std::cerr << "Error: Multiple number values specified\n";
                 return 0;
             }
             
             char* endptr;
-            n = std::strtoull(arg.c_str(), &endptr, 10);
-            if (*endptr != '\0' || n == 0) {
-                std::cerr << "Error: n must be a positive integer\n";
+            number = std::strtoull(arg.c_str(), &endptr, 10);
+            if (*endptr != '\0' || number == 0) {
+                std::cerr << "Error: number must be a positive integer\n";
                 return 0;
             }
         } else {
@@ -66,12 +66,12 @@ unsigned long long parse_args(int argc, char* argv[], bool& verbose, bool& very_
         }
     }
     
-    if (n == 0) {
-        std::cerr << "Error: n must be specified\n";
+    if (number == 0) {
+        std::cerr << "Error: number must be specified\n";
         return 0;
     }
     
-    return n;
+    return number;
 }
 
 /**
@@ -81,8 +81,8 @@ int main(int argc, char* argv[]) {
     bool verbose = false;
     bool very_verbose = false;
     
-    unsigned long long n = parse_args(argc, argv, verbose, very_verbose);
-    if (n == 0) {
+    unsigned long long number = parse_args(argc, argv, verbose, very_verbose);
+    if (number == 0) {
         return 1;
     }
     
@@ -90,8 +90,8 @@ int main(int argc, char* argv[]) {
         std::cout << "[DEBUG] Starting crazy calculations...\n";
     }
     
-    unsigned long long result = rat_trig::fib(n);
-    std::cout << "The " << n << "-th Fibonacci number is " << result << "\n";
+    unsigned long long result = rat_trig::fib(number);
+    std::cout << "The " << number << "-th Fibonacci number is " << result << "\n";
     
     if (verbose || very_verbose) {
         std::cout << "[INFO] Script ends here\n";

@@ -1,56 +1,55 @@
--- xmake.lua for rat-trig C++ project
-set_project("rat-trig")
-set_version("0.1.0")
-set_languages("cxx20")
+add_rules("mode.debug", "mode.release")
 
--- Options
-option("shared", {description = "Build shared library", default = true})
-option("tests", {description = "Build tests", default = true})
-option("examples", {description = "Build examples", default = true})
+set_languages("c++20")
 
--- Library
-target("rat-trig")
-    set_kind("$(kind)")
+target("rat_trig")
+    set_kind("static")
+    -- Headers
     add_headerfiles("include/(rat_trig/**.hpp)")
-    add_files("src/trigonom.cpp")
-    add_includedirs("include", {public = true})
     
-    if is_plat("windows") then
-        add_defines("_USE_MATH_DEFINES")
+    -- Sources
+    add_files("src/**.cpp")
+    
+    -- Include directories
+    add_includedirs("include", {public = true})
+
+    -- C++ features
+    add_cxxflags("/std:c++latest", {tools = {"msvc"}})
+    add_cxxflags("-std=c++23", "-fcoroutines", {tools = {"gcc", "clang"}})
+
+    if is_mode("debug") then
+        add_defines("DEBUG")
+        add_cxxflags("-g", "-O0")
+    else
+        add_cxxflags("-O3")
     end
 
--- Tests
-if has_config("tests") then
-    add_requires("doctest")
-    
-    target("tests")
-        set_kind("binary")
-        add_files("tests/*.cpp")
-        add_deps("rat-trig")
-        add_packages("doctest")
-        add_includedirs("include")
-end
+-- target("test_rat_trig")
+--     set_kind("binary")
+--     add_deps("rat_trig")
+--     add_files("tests/**.cpp")
+--     add_includedirs("include")
+-- 
+--     -- Check if doctest exists, warn if not but don't download
+--     before_build(function (target)
+--         local doctest_path = path.join(target:scriptdir(), "tests", "doctest.h")
+--         if not os.isfile(doctest_path) then
+--             print("Warning: doctest.h not found. Tests will not compile.")
+--             print("You can download it manually from:")
+--             print("https://raw.githubusercontent.com/doctest/doctest/v2.4.11/doctest/doctest.h")
+--         end
+--     end)
 
--- Examples
-if has_config("examples") then
-    target("fibonacci")
-        set_kind("binary")
-        add_files("examples/fibonacci.cpp")
-        add_deps("rat-trig")
-        add_includedirs("include")
-    
-    target("basic_usage")
-        set_kind("binary")
-        add_files("examples/basic_usage.cpp")
-        add_deps("rat-trig")
-        add_includedirs("include")
-end
 
--- Default target
-if is_mode("debug") then
-    set_symbols("debug")
-    set_optimize("none")
-elseif is_mode("release") then
-    set_optimize("fastest")
-    set_strip("all")
-end
+-- Package configuration
+package("rat_trig")
+    set_description("Low-Discrepancy Sequence Generator C++ Library")
+    set_license("MIT")
+
+    add_urls("https://github.com/luk036/rat-trig.git")
+    add_versions("1.0.0", "dcda260be4010b1509c1dcb9d5f3edcddba9cc51")
+
+    on_install(function (package)
+        import("package.tools.cmake").install(package)
+    end)
+

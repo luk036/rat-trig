@@ -37,4 +37,4 @@ def test_parse_args() -> None:
     args = parse_args(["-vv", "1"])
     assert args.loglevel == logging.DEBUG
     args = parse_args(["1"])
-    assert args.n == 1
+    assert args.number == 1

@@ -40,7 +40,7 @@ straightforward and intuitive subject to understand and work with.
 from fractions import Fraction
 from typing import TypeVar, Union, Sequence
 
-T = TypeVar("T", int, Fraction, float)
+NumType = TypeVar("NumType", int, Fraction, float)
 Numeric = Union[int, Fraction, float]
 
 
@@ -154,36 +154,36 @@ def dot(v_1: Sequence[Numeric], v_2: Sequence[Numeric]) -> Numeric:
     return v_1[0] * v_2[0] + v_1[1] * v_2[1]
 
 
-def quad(v: Sequence[Numeric]) -> Numeric:
+def quad(vector: Sequence[Numeric]) -> Numeric:
     r"""
-    The `quad` function calculates the quadrance of a vector `v`.
+    The `quad` function calculates the quadrance of a vector `vector`.
 
-    :param v: A sequence of two numbers (integers, fractions, or floats).
-    :type v: Sequence[Numeric]
+    :param vector: A sequence of two numbers (integers, fractions, or floats).
+    :type vector: Sequence[Numeric]
     :return: The quadrance of the vector.
     :rtype: Numeric
 
     Example:
-        >>> v = [3, 4]
-        >>> quad(v)
+        >>> vector = [3, 4]
+        >>> quad(vector)
         25
 
     .. svgbob::
        :align: center
 
-           v[1] ^
-                |
-                |\\
-                | \\
-                |  \\\  quad(v) = v[0]^2 + v[1]^2
-                |   \\
-                |    \\
-                |     \\
-                |      \\
-                |_______\\\
-              O         v[0]
+           vector[1] ^
+                    |
+                    |\\
+                    | \\
+                    |  \\\  quad(vector) = vector[0]^2 + vector[1]^2
+                    |   \\
+                    |    \\
+                    |     \\
+                    |      \\
+                    |_______\\\
+                  O         vector[0]
     """
-    return v[0] * v[0] + v[1] * v[1]
+    return vector[0] * vector[0] + vector[1] * vector[1]
 
 
 def spread(v_1: Sequence[Numeric], v_2: Sequence[Numeric]) -> Numeric:

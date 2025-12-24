@@ -54,22 +54,22 @@ namespace rat_trig {
  * 
  * Supports integers, floating-point numbers, and any type that supports basic arithmetic operations.
  */
-template<typename T>
-concept Numeric = std::regular<T> && requires(T a, T b) {
-    { a + b } -> std::convertible_to<T>;
-    { a - b } -> std::convertible_to<T>;
-    { a * b } -> std::convertible_to<T>;
-    { a / b } -> std::convertible_to<T>;
-    { T{0} } -> std::convertible_to<T>;
-    { T{1} } -> std::convertible_to<T>;
-    { T{4} } -> std::convertible_to<T>;
+template<typename NumType>
+concept Numeric = std::regular<NumType> && requires(NumType value_a, NumType value_b) {
+    { value_a + value_b } -> std::convertible_to<NumType>;
+    { value_a - value_b } -> std::convertible_to<NumType>;
+    { value_a * value_b } -> std::convertible_to<NumType>;
+    { value_a / value_b } -> std::convertible_to<NumType>;
+    { NumType{0} } -> std::convertible_to<NumType>;
+    { NumType{1} } -> std::convertible_to<NumType>;
+    { NumType{4} } -> std::convertible_to<NumType>;
 };
 
 /**
  * @brief A 2D vector with numeric components
  */
-template<Numeric T>
-using Vector2 = std::array<T, 2>;
+template<Numeric NumType>
+using Vector2 = std::array<NumType, 2>;
 
 /**
  * @brief The function `archimedes` calculates the qudrea of a triangle using Archimedes' formula with
@@ -102,10 +102,10 @@ using Vector2 = std::array<T, 2>;
  *             q2
  * @endverbatim
  */
-template<Numeric T>
-constexpr T archimedes(T q_1, T q_2, T q_3) {
-    T temp = q_1 + q_2 - q_3;
-    return T{4} * q_1 * q_2 - temp * temp;
+template<Numeric NumType>
+constexpr NumType archimedes(NumType q_1, NumType q_2, NumType q_3) {
+    NumType temp = q_1 + q_2 - q_3;
+    return NumType{4} * q_1 * q_2 - temp * temp;
 }
 
 /**
@@ -135,8 +135,8 @@ constexpr T archimedes(T q_1, T q_2, T q_3) {
  *           O
  * @endverbatim
  */
-template<Numeric T>
-constexpr T cross(const Vector2<T>& v_1, const Vector2<T>& v_2) {
+template<Numeric NumType>
+constexpr NumType cross(const Vector2<NumType>& v_1, const Vector2<NumType>& v_2) {
     return v_1[0] * v_2[1] - v_1[1] * v_2[0];
 }
 
@@ -169,41 +169,41 @@ constexpr T cross(const Vector2<T>& v_1, const Vector2<T>& v_2) {
  *           O         projection
  * @endverbatim
  */
-template<Numeric T>
-constexpr T dot(const Vector2<T>& v_1, const Vector2<T>& v_2) {
+template<Numeric NumType>
+constexpr NumType dot(const Vector2<NumType>& v_1, const Vector2<NumType>& v_2) {
     return v_1[0] * v_2[0] + v_1[1] * v_2[1];
 }
 
 /**
- * @brief The `quad` function calculates the quadrance of a vector `v`.
+ * @brief The `quad` function calculates the quadrance of a vector `vector`.
  * 
- * @param v A 2D vector with numeric components
+ * @param vector A 2D vector with numeric components
  * 
  * @return The quadrance of the vector.
  * 
  * @example
  * @code
- * std::array v = {3, 4};
- * auto result = quad(v); // Should be 25
+ * std::array vector = {3, 4};
+ * auto result = quad(vector); // Should be 25
  * @endcode
  * 
  * @verbatim
- *           v[1] ^
- *                |
- *                |\\
- *                | \\
- *                |  \\\  quad(v) = v[0]^2 + v[1]^2
- *                |   \\
- *                |    \\
- *                |     \\
- *                |      \\
- *                |_______\\\
- *              O         v[0]
+ *           vector[1] ^
+ *                     |
+ *                     |\\
+ *                     | \\
+ *                     |  \\\  quad(vector) = vector[0]^2 + vector[1]^2
+ *                     |   \\
+ *                     |    \\
+ *                     |     \\
+ *                     |      \\
+ *                     |_______\\\
+ *                   O         vector[0]
  * @endverbatim
  */
-template<Numeric T>
-constexpr T quad(const Vector2<T>& v) {
-    return v[0] * v[0] + v[1] * v[1];
+template<Numeric NumType>
+constexpr NumType quad(const Vector2<NumType>& vector) {
+    return vector[0] * vector[0] + vector[1] * vector[1];
 }
 
 /**
@@ -223,11 +223,11 @@ constexpr T quad(const Vector2<T>& v) {
  * auto result = spread(v1, v2); // Should be 4/125 = 0.032
  * @endcode
  */
-template<Numeric T>
-constexpr T spread(const Vector2<T>& v_1, const Vector2<T>& v_2) {
-    T cross_product = cross(v_1, v_2);
-    T quad_1 = quad(v_1);
-    T quad_2 = quad(v_2);
+template<Numeric NumType>
+constexpr NumType spread(const Vector2<NumType>& v_1, const Vector2<NumType>& v_2) {
+    NumType cross_product = cross(v_1, v_2);
+    NumType quad_1 = quad(v_1);
+    NumType quad_2 = quad(v_2);
     return (cross_product * cross_product) / (quad_1 * quad_2);
 }
 
@@ -251,10 +251,10 @@ constexpr T spread(const Vector2<T>& v_1, const Vector2<T>& v_2) {
  * auto result = spread_law(q1, q2, q3); // Should be 0.8
  * @endcode
  */
-template<Numeric T>
-constexpr T spread_law(T q_1, T q_2, T q_3) {
-    T numerator = archimedes(q_1, q_2, q_3); // 4*q_1*q_2 - (q_1 + q_2 - q_3)^2
-    T denominator = T{4} * q_1 * q_2;
+template<Numeric NumType>
+constexpr NumType spread_law(NumType q_1, NumType q_2, NumType q_3) {
+    NumType numerator = archimedes(q_1, q_2, q_3); // 4*q_1*q_2 - (q_1 + q_2 - q_3)^2
+    NumType denominator = NumType{4} * q_1 * q_2;
     return numerator / denominator;
 }
 
@@ -277,17 +277,17 @@ constexpr T spread_law(T q_1, T q_2, T q_3) {
  * auto result = triple_quad_formula(q1, q2, s3); // Should be 416
  * @endcode
  */
-template<Numeric T>
-constexpr T triple_quad_formula(T q_1, T q_2, T s_3) {
+template<Numeric NumType>
+constexpr NumType triple_quad_formula(NumType q_1, NumType q_2, NumType s_3) {
     // Formula: (q_1 + q_2)^2 - 4*q_1*q_2*(1-s_3)
-    T sum = q_1 + q_2;
-    return sum * sum - T{4} * q_1 * q_2 * (T{1} - s_3);
+    NumType sum = q_1 + q_2;
+    return sum * sum - NumType{4} * q_1 * q_2 * (NumType{1} - s_3);
 }
 
 /**
  * @brief Fibonacci example function
  * 
- * @param n integer (must be > 0)
+ * @param number integer (must be > 0)
  * 
  * @return n-th Fibonacci number
  * 
@@ -306,18 +306,18 @@ constexpr T triple_quad_formula(T q_1, T q_2, T s_3) {
  *   *     *     **    ***   ***** ******** ...
  * @endverbatim
  */
-constexpr unsigned long long fib(unsigned long long n) {
-    if (n == 0) return 0;
-    if (n == 1) return 1;
+constexpr unsigned long long fib(unsigned long long number) {
+    if (number == 0) return 0;
+    if (number == 1) return 1;
     
-    unsigned long long a = 1;
-    unsigned long long b = 1;
-    for (unsigned long long i = 2; i < n; ++i) {
-        unsigned long long temp = a + b;
-        a = b;
-        b = temp;
+    unsigned long long first = 1;
+    unsigned long long second = 1;
+    for (unsigned long long idx = 2; idx < number; ++idx) {
+        unsigned long long temp_sum = first + second;
+        first = second;
+        second = temp_sum;
     }
-    return b;
+    return second;
 }
 
 } // namespace rat_trig
