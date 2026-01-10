@@ -64,20 +64,20 @@ xmake
 
 int main() {
     using namespace rat_trig;
-    
+
     // Calculate Archimedes' formula
     double q1 = 0.5;
     double q2 = 0.25;
     double q3 = 1.0 / 6.0;
     double result = archimedes(q1, q2, q3);
     std::cout << "Result: " << result << std::endl;
-    
+
     // Calculate cross product
     std::array<int, 2> v1 = {1, 2};
     std::array<int, 2> v2 = {3, 4};
     int cross_result = cross(v1, v2);
     std::cout << "Cross product: " << cross_result << std::endl;
-    
+
     return 0;
 }
 ```

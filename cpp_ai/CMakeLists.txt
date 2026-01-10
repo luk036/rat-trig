@@ -30,7 +30,7 @@ target_include_directories(rat-trig PUBLIC
 # Tests
 if(BUILD_TESTS)
   enable_testing()
-  
+
   # Download doctest if not found
   if(NOT TARGET doctest)
     include(FetchContent)

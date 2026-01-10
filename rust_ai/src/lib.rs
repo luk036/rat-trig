@@ -64,7 +64,7 @@ pub type Vector2<T> = [T; 2];
 /// # Arguments
 ///
 /// * `q_1` - First quadrance of the triangle
-/// * `q_2` - Second quadrance of the triangle  
+/// * `q_2` - Second quadrance of the triangle
 /// * `q_3` - Third quadrance of the triangle
 ///
 /// # Returns

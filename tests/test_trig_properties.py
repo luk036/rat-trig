@@ -6,18 +6,18 @@ and triple_quad_formula functions from rat_trig.trigonom module. These tests
 verify mathematical properties that should hold for all valid inputs.
 """
 
-from hypothesis import given, strategies as st, assume
 import pytest
+from hypothesis import assume, given
+from hypothesis import strategies as st
 
 from rat_trig.trigonom import (
     archimedes,
+    cross,
+    quad,
     spread,
     spread_law,
     triple_quad_formula,
-    cross,
-    quad,
 )
-
 
 # Strategy for generating numeric values (int, Fraction, float)
 numeric_strategy = st.one_of(

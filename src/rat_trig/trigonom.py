@@ -38,7 +38,7 @@ straightforward and intuitive subject to understand and work with.
 """
 
 from fractions import Fraction
-from typing import TypeVar, Union, Sequence
+from typing import Sequence, TypeVar, Union
 
 NumType = TypeVar("NumType", int, Fraction, float)
 Numeric = Union[int, Fraction, float]

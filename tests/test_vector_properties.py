@@ -7,11 +7,12 @@ should hold for all valid inputs.
 """
 
 from fractions import Fraction
-from hypothesis import given, strategies as st
+
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
 
-from rat_trig.trigonom import dot, cross, quad
-
+from rat_trig.trigonom import cross, dot, quad
 
 # Strategy for generating numeric values (int, Fraction, float)
 numeric_strategy = st.one_of(

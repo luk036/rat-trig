@@ -6,10 +6,10 @@ target("rat_trig")
     set_kind("static")
     -- Headers
     add_headerfiles("include/(rat_trig/**.hpp)")
-    
+
     -- Sources
     add_files("src/**.cpp")
-    
+
     -- Include directories
     add_includedirs("include", {public = true})
 
@@ -29,7 +29,7 @@ target("rat_trig")
 --     add_deps("rat_trig")
 --     add_files("tests/**.cpp")
 --     add_includedirs("include")
--- 
+--
 --     -- Check if doctest exists, warn if not but don't download
 --     before_build(function (target)
 --         local doctest_path = path.join(target:scriptdir(), "tests", "doctest.h")
@@ -52,4 +52,3 @@ package("rat_trig")
     on_install(function (package)
         import("package.tools.cmake").install(package)
     end)
-

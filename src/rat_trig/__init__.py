@@ -1,14 +1,12 @@
-from .trigonom import (
-    archimedes as archimedes,
-    cross as cross,
-    dot as dot,
-    quad as quad,
-    spread as spread,
-    spread_law as spread_law,
-    triple_quad_formula as triple_quad_formula,
-)
-
 import sys
+
+from .trigonom import archimedes as archimedes
+from .trigonom import cross as cross
+from .trigonom import dot as dot
+from .trigonom import quad as quad
+from .trigonom import spread as spread
+from .trigonom import spread_law as spread_law
+from .trigonom import triple_quad_formula as triple_quad_formula
 
 if sys.version_info[:2] >= (3, 8):
     # TODO: Import directly (no need for conditional) when `python_requires = >= 3.9`
