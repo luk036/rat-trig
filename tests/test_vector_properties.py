@@ -17,7 +17,7 @@ from rat_trig.trigonom import dot, cross, quad
 numeric_strategy = st.one_of(
     st.integers(min_value=-100, max_value=100),
     st.fractions(min_value=-100, max_value=100, max_denominator=100),
-    st.floats(min_value=-100.0, max_value=100.0, allow_nan=False, allow_infinity=False)
+    st.floats(min_value=-100.0, max_value=100.0, allow_nan=False, allow_infinity=False),
 )
 
 # Strategy for generating 2D vectors with numeric components
@@ -36,7 +36,7 @@ def test_dot_product_commutative(v1, v2):
 def test_dot_product_distributive(v1, v2, v3):
     """Test that dot product is distributive: v·(w + u) = v·w + v·u"""
     # For property testing, we need to ensure the same type
-    if type(v1[0]) == type(v2[0]) == type(v3[0]):
+    if isinstance(v1[0], type(v2[0])) and isinstance(v2[0], type(v3[0])):
         v2_plus_v3 = (v2[0] + v3[0], v2[1] + v3[1])
         result1 = dot(v1, v2_plus_v3)
         result2 = dot(v1, v2) + dot(v1, v3)
@@ -130,7 +130,7 @@ def test_quadrance_homogeneous(v, k):
     kv = (v[0] * k, v[1] * k)
     result1 = quad(kv)
     result2 = k * k * quad(v)
-    
+
     # Use relative error for better floating point handling
     if result2 == 0:
         assert abs(result1 - result2) < 1e-10
@@ -144,7 +144,7 @@ def test_pythagorean_theorem(v1, v2):
     """Test Pythagorean theorem: ||v||² + ||w||² = ||v + w||² - 2·v·w"""
     # This is a rearranged form of: ||v + w||² = ||v||² + ||w||² + 2·v·w
     # We need to ensure same types to avoid mixing
-    if type(v1[0]) == type(v2[0]):
+    if isinstance(v1[0], type(v2[0])):
         v1_plus_v2 = (v1[0] + v2[0], v1[1] + v2[1])
         lhs = quad(v1) + quad(v2)
         rhs = quad(v1_plus_v2) - 2 * dot(v1, v2)
@@ -162,7 +162,7 @@ def test_lagrange_identity(v1, v2):
     dot_sq = dot(v1, v2) ** 2
     cross_sq = cross(v1, v2) ** 2
     quad_product = quad(v1) * quad(v2)
-    
+
     # Use relative error for better floating point handling
     if quad_product == 0:
         assert abs(dot_sq + cross_sq - quad_product) < 1e-10

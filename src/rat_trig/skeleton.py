@@ -85,7 +85,9 @@ def parse_args(args: List[str]) -> argparse.Namespace:
         action="version",
         version=f"rat-trig {__version__}",
     )
-    parser.add_argument(dest="number", help="n-th Fibonacci number", type=int, metavar="INT")
+    parser.add_argument(
+        dest="number", help="n-th Fibonacci number", type=int, metavar="INT"
+    )
     parser.add_argument(
         "-v",
         "--verbose",
