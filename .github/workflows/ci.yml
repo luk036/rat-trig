@@ -42,7 +42,7 @@ jobs:
         id: setup-python
         with: { python-version: "3.12" }
       - name: Build package distribution files
-        run: >-
+        run: |
           pip install -U pip setuptools wheel
           python -m build
       - name: Record path of wheel distribution
