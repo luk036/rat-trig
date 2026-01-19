@@ -17,7 +17,7 @@ This C++ library provides:
 ## Features
 
 ### Core Functions
-- `archimedes()`: Calculates qudrea using Archimedes' formula
+- `archimedes()`: Calculates quadrea using Archimedes' formula
 - `cross()`: 2D cross product
 - `dot()`: Dot product
 - `quad()`: Quadrance (squared length)
@@ -100,7 +100,7 @@ int main() {
 ## API Documentation
 
 ### `archimedes(q1, q2, q3)`
-Calculates the qudrea of a triangle using Archimedes' formula.
+Calculates the quadrea of a triangle using Archimedes' formula.
 
 **Parameters:**
 - `q1`, `q2`, `q3`: Quadrances (squared distances) of triangle sides

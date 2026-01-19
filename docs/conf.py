@@ -167,6 +167,11 @@ pygments_style = "sphinx"
 # If this is True, todo emits a warning for each TODO entries. The default is False.
 todo_emit_warnings = True
 
+# Doctest configuration
+doctest_global_setup = """
+from rat_trig import archimedes, cross, dot, quad, spread, spread_law, triple_quad_formula
+"""
+
 
 # -- Options for HTML output -------------------------------------------------
 

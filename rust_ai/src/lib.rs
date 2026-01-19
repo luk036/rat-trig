@@ -57,7 +57,7 @@ impl<T> Numeric for T where
 /// A 2D vector with numeric components
 pub type Vector2<T> = [T; 2];
 
-/// The function `archimedes` calculates the qudrea of a triangle using Archimedes' formula with
+/// The function `archimedes` calculates the quadrea of a triangle using Archimedes' formula with
 /// the lengths of the three sides `q_1`, `q_2`, and `q_3`. It can also be used to check if a quadraple
 /// with length Q1, Q2, Q3, Q4 is on a circle.
 ///

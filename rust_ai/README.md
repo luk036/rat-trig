@@ -20,7 +20,7 @@ directed angle," which are defined in terms of lines and line segments, rather t
 
 ## Features
 
-- **Archimedes' formula**: Calculate the qudrea of a triangle
+- **Archimedes' formula**: Calculate the quadrea of a triangle
 - **Vector operations**: Cross product, dot product, and quadrance (squared length)
 - **Spread calculations**: Rational alternative to sine squared
 - **Spread law**: Rational trigonometry's version of the law of sines
@@ -88,7 +88,7 @@ cargo run --bin fibonacci -- -V 10
 
 ### Core Functions
 
-- `archimedes(q1, q2, q3)`: Calculate qudrea using Archimedes' formula
+- `archimedes(q1, q2, q3)`: Calculate quadrea using Archimedes' formula
 - `cross(v1, v2)`: Calculate 2D cross product
 - `dot(v1, v2)`: Calculate dot product
 - `quad(v)`: Calculate quadrance (squared length)

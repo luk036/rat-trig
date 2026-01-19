@@ -46,7 +46,7 @@ Numeric = Union[int, Fraction, float]
 
 def archimedes(q_1: Numeric, q_2: Numeric, q_3: Numeric) -> Numeric:
     r"""
-    The function `archimedes` calculates the qudrea of a triangle using Archimedes' formula with
+    The function `archimedes` calculates the quadrea of a triangle using Archimedes' formula with
     the lengths of the three sides `q_1`, `q_2`, and `q_3`. It can also be used to check if a quadraple
     with length Q1, Q2, Q3, Q4 is on a circle.
 
@@ -64,6 +64,7 @@ def archimedes(q_1: Numeric, q_2: Numeric, q_3: Numeric) -> Numeric:
         \(\text{temp} = q_1 + q_2 - q_3\).
 
     Example:
+        >>> from fractions import Fraction
         >>> q_1 = Fraction(1, 2)
         >>> q_2 = Fraction(1, 4)
         >>> q_3 = Fraction(1, 6)

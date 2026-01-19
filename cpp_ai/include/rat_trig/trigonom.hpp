@@ -72,7 +72,7 @@ template<Numeric NumType>
 using Vector2 = std::array<NumType, 2>;
 
 /**
- * @brief The function `archimedes` calculates the qudrea of a triangle using Archimedes' formula with
+ * @brief The function `archimedes` calculates the quadrea of a triangle using Archimedes' formula with
  * the lengths of the three sides `q_1`, `q_2`, and `q_3`. It can also be used to check if a quadraple
  * with length Q1, Q2, Q3, Q4 is on a circle.
  *
