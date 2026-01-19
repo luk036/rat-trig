@@ -173,6 +173,4 @@ def test_lagrange_identity(v1, v2):
 
 
 if __name__ == "__main__":
-    import pytest
-
     pytest.main()

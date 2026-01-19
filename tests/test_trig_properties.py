@@ -233,6 +233,4 @@ def test_triple_quad_formula_vector_consistency(v1, v2):
 
 
 if __name__ == "__main__":
-    import pytest
-
     pytest.main()
