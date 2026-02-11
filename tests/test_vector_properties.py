@@ -12,7 +12,7 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
-from rat_trig.trigonom import cross, dot, quad
+from rat_trig.trigonom import Numeric, cross, dot, quad
 
 # Strategy for generating numeric values (int, Fraction, float)
 numeric_strategy = st.one_of(
@@ -119,10 +119,8 @@ def test_cross_product_homogeneous(v, k):
 @given(vector_strategy)
 def test_quadrance_non_negative(v) -> None:
     """Test that quadrance is always non-negative"""
-    from fractions import Fraction
-
-    result: int | Fraction | float = quad(v)  # type: ignore
-    assert result >= 0  # type: ignore
+    result: Numeric = quad(v)  # type: ignore[assignment]
+    assert result >= 0  # type: ignore[operator]
 
 
 @given(vector_strategy)
@@ -140,18 +138,18 @@ def test_quadrance_zero_only_for_zero_vector(v):
 @given(vector_strategy, st.integers(min_value=1, max_value=10))
 def test_quadrance_homogeneous(v, k) -> None:
     """Test that quadrance is homogeneous: quad(k·v) = k²·quad(v)"""
-    from fractions import Fraction
-
     kv = (v[0] * k, v[1] * k)
-    result1: int | Fraction | float = quad(kv)  # type: ignore
-    result2: int | Fraction | float = k * k * quad(v)  # type: ignore
+    result1: Numeric = quad(kv)  # type: ignore[assignment]
+    result2: Numeric = k * k * quad(v)  # type: ignore[assignment]
 
     # Use relative error for better floating point handling
-    if result2 == 0:
-        assert abs(result1 - result2) < 1e-10  # type: ignore
+    if result2 == 0:  # type: ignore[comparison-overlap]
+        assert abs(result1 - result2) < 1e-10  # type: ignore[operator]
     else:
-        relative_error = abs(result1 - result2) / abs(result2)  # type: ignore
-        assert relative_error < 1e-8  # Allow small floating point errors
+        relative_error = abs(result1 - result2) / abs(result2)  # type: ignore[operator]
+        assert (
+            relative_error < 1e-8
+        )  # Allow small floating point errors  # type: ignore[operator]
 
 
 @given(vector_strategy, vector_strategy)
@@ -174,12 +172,12 @@ def test_pythagorean_theorem(v1, v2):
 def test_lagrange_identity(v1, v2) -> None:
     """Test Lagrange's identity: (v·w)² + (v×w)² = ||v||²·||w||²"""
     # This identity holds in 2D
-    dot_sq = dot(v1, v2) ** 2
-    cross_sq = cross(v1, v2) ** 2
-    quad_product = quad(v1) * quad(v2)
+    dot_sq: Numeric = dot(v1, v2) ** 2  # type: ignore[assignment]
+    cross_sq: Numeric = cross(v1, v2) ** 2  # type: ignore[assignment]
+    quad_product: Numeric = quad(v1) * quad(v2)  # type: ignore[assignment]
 
     # Use absolute error for very small values to avoid division by near-zero
-    if abs(quad_product) < 1e-100:
+    if abs(quad_product) < 1e-100:  # type: ignore[operator]
         # When dealing with extremely small numbers, use absolute error
         assert abs(dot_sq + cross_sq - quad_product) < 1e-50  # type: ignore
     elif quad_product == 0:
