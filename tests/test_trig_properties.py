@@ -145,7 +145,7 @@ def test_spread_law_symmetry(q1, q2, q3):
 
 
 @given(vector_strategy, vector_strategy)
-def test_spread_law_vector_consistency(v1, v2):
+def test_spread_law_vector_consistency(v1, v2) -> None:
     """Test that spread law is consistent with spread function for vectors"""
     # Avoid zero vectors
     assume(v1 != (0, 0) and v2 != (0, 0))
@@ -162,19 +162,21 @@ def test_spread_law_vector_consistency(v1, v2):
 
     # Allow for floating point precision issues
     if isinstance(spread_direct, float) or isinstance(spread_from_law, float):
-        assert abs(spread_direct - spread_from_law) < 1e-10
+        assert abs(spread_direct - spread_from_law) < 1e-10  # type: ignore
     else:
-        assert spread_direct == spread_from_law
+        assert spread_direct == spread_from_law  # type: ignore
 
 
 @given(numeric_strategy, numeric_strategy, spread_strategy)
-def test_triple_quad_formula_range(q1, q2, s3):
+def test_triple_quad_formula_range(q1, q2, s3) -> None:
     """Test that triple quad formula returns reasonable values"""
+    from fractions import Fraction
+
     assume(q1 >= 0 and q2 >= 0 and 0 <= s3 <= 1)
 
-    result = triple_quad_formula(q1, q2, s3)
+    result: int | Fraction | float = triple_quad_formula(q1, q2, s3)  # type: ignore
     # The result should be non-negative for valid inputs
-    assert result >= 0
+    assert result >= 0  # type: ignore
 
 
 @given(numeric_strategy, numeric_strategy, spread_strategy)
