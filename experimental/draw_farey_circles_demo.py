@@ -1,12 +1,36 @@
+"""
+Ford Circle Gasket Demo - GPU-accelerated generation of Ford circles.
+
+This module demonstrates using Numba CUDA to generate Ford circles
+(also known as Ford gasket) using the Descartes circle theorem.
+The algorithm creates circles that are tangent to each other and
+the x-axis using GPU parallel computation.
+
+Example:
+    Run with: python draw_farey_circles_demo.py
+"""
+
+import math
+
+import matplotlib.pyplot as plt
 import numpy as np
 from numba import cuda
-import math
-import matplotlib.pyplot as plt
 
 
 # Numba CUDA kernel requires math.sqrt instead of np.sqrt
 @cuda.jit
 def generate_next_generation(ks, kzs_r, out_ks, out_kzs_r, n_parents):
+    """CUDA kernel to generate the next generation of Ford circles.
+
+    Uses the Descartes circle theorem to calculate new circles from
+    parent circles. Each thread processes one pair of parent circles.
+
+    :param ks: Array of curvatures for parent circles.
+    :param kzs_r: Array of real parts of complex curvatures.
+    :param out_ks: Output array for new circle curvatures.
+    :param out_kzs_r: Output array for new complex curvature real parts.
+    :param n_parents: Number of parent circle pairs.
+    """
     idx = cuda.grid(1)
     if idx < n_parents:
         # Parents
@@ -34,7 +58,15 @@ def generate_next_generation(ks, kzs_r, out_ks, out_kzs_r, n_parents):
 
 
 def build_ford_gasket(generations=6):
-    # Start with two circles of radius 0.5 (k=2) at x=0 and x=1
+    """Build a Ford circle gasket using GPU-accelerated generation.
+
+    Starts with two initial circles at x=0 and x=1, then iteratively
+    generates new circles using the Descartes circle theorem. Each
+    generation doubles the number of circles.
+
+    :param generations: Number of generations to compute (default 6).
+    :return: List of tuples (curvature, complex_curvature_real) for all circles.
+    """
 
     all_circles = [(2.0, 0.0), (2.0, 2.0)]
 
@@ -84,6 +116,13 @@ def build_ford_gasket(generations=6):
 
 
 def visualize(circles):
+    """Visualize the Ford circles using matplotlib.
+
+    Plots all circles in the gasket, with each circle's position
+    determined by its curvature and complex curvature.
+
+    :param circles: List of tuples (curvature, complex_curvature_real).
+    """
     fig, ax = plt.subplots(figsize=(12, 5))
     # Sort circles by x-coordinate for a cleaner plot if needed
     for k, kz_r in circles:

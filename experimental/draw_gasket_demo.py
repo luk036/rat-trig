@@ -1,6 +1,17 @@
+"""
+Apollonian Gasket Demo - GPU-accelerated generation of Apollonian circles.
+
+This module demonstrates using Numba CUDA to generate Apollonian circles
+(also known as Apollonian gasket) using the complex Descartes circle theorem.
+The algorithm creates a fractal of circles that are all tangent to each other.
+
+Example:
+    Run with: python draw_gasket_demo.py
+"""
+
+import matplotlib.pyplot as plt
 import numpy as np
 from numba import cuda
-import matplotlib.pyplot as plt
 
 
 # The kernel handles the complex arithmetic and linear flipping
@@ -9,6 +20,20 @@ import matplotlib.pyplot as plt
 def flip_circles_kernel(
     ks, kzs_real, kzs_imag, indices, out_ks, out_kzs_real, out_kzs_imag
 ):
+    """CUDA kernel to flip circles using the complex Descartes theorem.
+
+    Applies the Descartes circle theorem in complex form to generate
+    new circles from existing ones. Each thread processes one branch
+    of the recursive gasket construction.
+
+    :param ks: Array of curvatures.
+    :param kzs_real: Array of real parts of complex curvatures.
+    :param kzs_imag: Array of imaginary parts of complex curvatures.
+    :param indices: Array of indices defining which circles to flip.
+    :param out_ks: Output array for new curvatures.
+    :param out_kzs_real: Output array for new complex curvature real parts.
+    :param out_kzs_imag: Output array for new complex curvature imaginary parts.
+    """
     idx = cuda.grid(1)
     if idx < indices.shape[0]:
         # Identify the 4 circles in this branch
@@ -32,7 +57,12 @@ def flip_circles_kernel(
 
 
 def draw_gasket():
-    # Setup initial "Kissing Circles" from the document example
+    """Generate and visualize an Apollonian gasket using GPU computation.
+
+    Sets up an initial configuration of four mutually tangent circles
+    and uses the complex Descartes theorem to generate new circles
+    that fill the gaps between them.
+    """
     # k = -1 (outer), k = 2, 2, 3 (inner)
     ks = np.array([-1.0, 2.0, 2.0, 3.0], dtype=np.float32)
 

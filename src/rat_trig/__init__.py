@@ -1,3 +1,20 @@
+"""
+rat_trig - Rational Trigonometry
+
+A Python implementation of Norman Wildberger's Rational Trigonometry,
+which replaces traditional trigonometry concepts with quadrance (squared
+distance) and spread (squared sine of angle) for exact rational calculations.
+
+Main functions:
+- archimedes: Calculate the quadrea of a triangle
+- cross: Calculate the cross product of two vectors
+- dot: Calculate the dot product of two vectors
+- quad: Calculate the quadrance of a vector
+- spread: Calculate the spread between two vectors
+- spread_law: Apply the law of spreads to a triangle
+- triple_quad_formula: Apply the triple quad formula
+"""
+
 import sys
 
 from .trigonom import archimedes as archimedes

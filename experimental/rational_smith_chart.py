@@ -1,8 +1,26 @@
+"""
+Rational Smith Chart Demo - Visualization of rational trigonometry concepts.
+
+This module demonstrates how rational trigonometry can be applied to create
+a modified Smith chart for transmission line analysis. It visualizes
+quadrance (squared distance) as circles and spread (squared sine) as
+directional lines within the unit disk.
+
+Example:
+    Run with: python rational_smith_chart.py
+"""
+
 import matplotlib.pyplot as plt
 import numpy as np
 
 
 def draw_rational_chart():
+    """Visualize a rational Smith chart showing quadrance and spread.
+
+    Creates a plot showing constant quadrance circles (representing
+    squared distances from the origin) and constant spread lines
+    (representing directional information) in the unit disk.
+    """
     fig, ax = plt.subplots(figsize=(8, 8))
 
     # 1. Draw the Boundary (The Unit Disk where Quadrance Q = 1)

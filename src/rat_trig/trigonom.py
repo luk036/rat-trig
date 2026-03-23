@@ -41,7 +41,10 @@ from fractions import Fraction
 from typing import Sequence, TypeVar, Union
 
 NumType = TypeVar("NumType", int, Fraction, float)
+"""Type variable for numeric types: int, Fraction, or float."""
+
 Numeric = Union[int, Fraction, float]
+"""Type alias for numeric types: int, Fraction, or float."""
 
 
 def archimedes(q_1: Numeric, q_2: Numeric, q_3: Numeric) -> Numeric:
