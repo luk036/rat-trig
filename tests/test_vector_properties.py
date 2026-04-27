@@ -69,7 +69,7 @@ def test_dot_product_positive_definite(v):
     result = dot(v, v)
     assert result >= 0
     # Only check equality to zero for exact types (not floats due to precision)
-    if isinstance(v[0], (int, Fraction)):
+    if all(isinstance(x, (int, Fraction)) for x in v):
         if v[0] == 0 and v[1] == 0:
             assert result == 0
         else:
@@ -128,7 +128,7 @@ def test_quadrance_zero_only_for_zero_vector(v):
     """Test that quadrance is zero only for the zero vector"""
     result = quad(v)
     # Only check equality to zero for exact types (not floats due to precision)
-    if isinstance(v[0], (int, Fraction)):
+    if all(isinstance(x, (int, Fraction)) for x in v):
         if v[0] == 0 and v[1] == 0:
             assert result == 0
         else:
