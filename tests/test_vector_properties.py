@@ -26,7 +26,7 @@ vector_strategy = st.tuples(numeric_strategy, numeric_strategy)
 
 
 @given(vector_strategy, vector_strategy)
-def test_dot_product_commutative(v1, v2) -> None:
+def test_dot_product_commutative(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]) -> None:
     """Test that dot product is commutative: v·w = w·v"""
     result1 = dot(v1, v2)
     result2 = dot(v2, v1)
@@ -34,7 +34,7 @@ def test_dot_product_commutative(v1, v2) -> None:
 
 
 @given(vector_strategy, vector_strategy, vector_strategy)
-def test_dot_product_distributive(v1, v2, v3) -> None:
+def test_dot_product_distributive(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric], v3: tuple[Numeric, Numeric]) -> None:
     """Test that dot product is distributive: v·(w + u) = v·w + v·u"""
     # For property testing, we need to ensure the same type
     if isinstance(v1[0], type(v2[0])) and isinstance(v2[0], type(v3[0])):
@@ -49,7 +49,7 @@ def test_dot_product_distributive(v1, v2, v3) -> None:
 
 
 @given(vector_strategy, st.integers(min_value=1, max_value=10))
-def test_dot_product_homogeneous(v, k) -> None:
+def test_dot_product_homogeneous(v: tuple[Numeric, Numeric], k: int) -> None:
     """Test that dot product is homogeneous: (k·v)·w = k·(v·w)"""
     # Use a fixed second vector to avoid type mixing issues
     w = (1, 1) if isinstance(v[0], (int, Fraction)) else (1.0, 1.0)
@@ -64,7 +64,7 @@ def test_dot_product_homogeneous(v, k) -> None:
 
 
 @given(vector_strategy)
-def test_dot_product_positive_definite(v) -> None:
+def test_dot_product_positive_definite(v: tuple[Numeric, Numeric]) -> None:
     """Test that dot product is positive definite: v·v ≥ 0 and v·v = 0 iff v = 0"""
     result = dot(v, v)
     assert result >= 0
@@ -87,7 +87,7 @@ def test_dot_product_positive_definite(v) -> None:
 
 
 @given(vector_strategy, vector_strategy)
-def test_cross_product_anticommutative(v1, v2) -> None:
+def test_cross_product_anticommutative(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]) -> None:
     """Test that cross product is anticommutative: v×w = -(w×v)"""
     result1 = cross(v1, v2)
     result2 = cross(v2, v1)
@@ -95,14 +95,14 @@ def test_cross_product_anticommutative(v1, v2) -> None:
 
 
 @given(vector_strategy)
-def test_cross_product_parallel(v) -> None:
+def test_cross_product_parallel(v: tuple[Numeric, Numeric]) -> None:
     """Test that cross product of parallel vectors is zero: v×v = 0"""
     result = cross(v, v)
     assert result == 0
 
 
 @given(vector_strategy, st.integers(min_value=1, max_value=10))
-def test_cross_product_homogeneous(v, k) -> None:
+def test_cross_product_homogeneous(v: tuple[Numeric, Numeric], k: int) -> None:
     """Test that cross product is homogeneous: (k·v)×w = k·(v×w)"""
     # Use a fixed second vector to avoid type mixing issues
     w = (1, 1) if isinstance(v[0], (int, Fraction)) else (1.0, 1.0)
@@ -117,14 +117,14 @@ def test_cross_product_homogeneous(v, k) -> None:
 
 
 @given(vector_strategy)
-def test_quadrance_non_negative(v) -> None:
+def test_quadrance_non_negative(v: tuple[Numeric, Numeric]) -> None:
     """Test that quadrance is always non-negative"""
     result: Numeric = quad(v)  # type: ignore[assignment]
     assert result >= 0  # type: ignore[operator]
 
 
 @given(vector_strategy)
-def test_quadrance_zero_only_for_zero_vector(v) -> None:
+def test_quadrance_zero_only_for_zero_vector(v: tuple[Numeric, Numeric]) -> None:
     """Test that quadrance is zero only for the zero vector"""
     result = quad(v)
     # Only check equality to zero for exact types (not floats due to precision)
@@ -136,7 +136,7 @@ def test_quadrance_zero_only_for_zero_vector(v) -> None:
 
 
 @given(vector_strategy, st.integers(min_value=1, max_value=10))
-def test_quadrance_homogeneous(v, k) -> None:
+def test_quadrance_homogeneous(v: tuple[Numeric, Numeric], k: int) -> None:
     """Test that quadrance is homogeneous: quad(k·v) = k²·quad(v)"""
     kv = (v[0] * k, v[1] * k)
     result1: Numeric = quad(kv)  # type: ignore[assignment]
@@ -153,7 +153,7 @@ def test_quadrance_homogeneous(v, k) -> None:
 
 
 @given(vector_strategy, vector_strategy)
-def test_pythagorean_theorem(v1, v2) -> None:
+def test_pythagorean_theorem(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]) -> None:
     """Test Pythagorean theorem: ||v||² + ||w||² = ||v + w||² - 2·v·w"""
     # This is a rearranged form of: ||v + w||² = ||v||² + ||w||² + 2·v·w
     # We need to ensure same types to avoid mixing
@@ -169,7 +169,7 @@ def test_pythagorean_theorem(v1, v2) -> None:
 
 
 @given(vector_strategy, vector_strategy)
-def test_lagrange_identity(v1, v2) -> None:
+def test_lagrange_identity(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]) -> None:
     """Test Lagrange's identity: (v·w)² + (v×w)² = ||v||²·||w||²"""
     # This identity holds in 2D
     dot_sq: Numeric = dot(v1, v2) ** 2  # type: ignore[assignment]
