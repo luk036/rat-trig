@@ -37,7 +37,7 @@ spread_strategy = st.one_of(
 
 
 @given(numeric_strategy, numeric_strategy, numeric_strategy)
-def test_archimedes_symmetry(q1, q2, q3):
+def test_archimedes_symmetry(q1, q2, q3) -> None:
     """Test that Archimedes function is symmetric in its first two arguments"""
     result1 = archimedes(q1, q2, q3)
     result2 = archimedes(q2, q1, q3)
@@ -45,7 +45,7 @@ def test_archimedes_symmetry(q1, q2, q3):
 
 
 @given(numeric_strategy, numeric_strategy, numeric_strategy)
-def test_archimedes_non_negative(q1, q2, q3):
+def test_archimedes_non_negative(q1, q2, q3) -> None:
     """Test that Archimedes function returns non-negative values for valid triangles"""
     # For a valid triangle, the sum of any two sides must be greater than the third
     # In terms of quadrances, this means: sqrt(q1) + sqrt(q2) > sqrt(q3)
@@ -60,7 +60,7 @@ def test_archimedes_non_negative(q1, q2, q3):
 
 
 @given(vector_strategy, vector_strategy)
-def test_spread_range(v1, v2):
+def test_spread_range(v1, v2) -> None:
     """Test that spread is always between 0 and 1"""
     # Avoid zero vectors which would cause division by zero
     assume(v1 != (0, 0) and v2 != (0, 0))
@@ -70,7 +70,7 @@ def test_spread_range(v1, v2):
 
 
 @given(vector_strategy, vector_strategy)
-def test_spread_parallel_vectors(v1, v2):
+def test_spread_parallel_vectors(v1, v2) -> None:
     """Test that spread is 0 for parallel vectors"""
     # Create a parallel vector by scaling
     k = 2  # Scaling factor
@@ -81,7 +81,7 @@ def test_spread_parallel_vectors(v1, v2):
 
 
 @given(vector_strategy)
-def test_spread_perpendicular_vectors(v):
+def test_spread_perpendicular_vectors(v) -> None:
     """Test that spread is 1 for perpendicular vectors"""
     # Create a perpendicular vector by rotating 90 degrees
     v_perp = (-v[1], v[0])
@@ -91,7 +91,7 @@ def test_spread_perpendicular_vectors(v):
 
 
 @given(vector_strategy, vector_strategy)
-def test_spread_symmetry(v1, v2):
+def test_spread_symmetry(v1, v2) -> None:
     """Test that spread is symmetric: spread(v1, v2) = spread(v2, v1)"""
     # Avoid zero vectors
     assume(v1 != (0, 0) and v2 != (0, 0))
@@ -102,7 +102,7 @@ def test_spread_symmetry(v1, v2):
 
 
 @given(vector_strategy, vector_strategy)
-def test_spread_formula_consistency(v1, v2):
+def test_spread_formula_consistency(v1, v2) -> None:
     """Test that spread formula is consistent with cross and quad functions"""
     # Avoid zero vectors
     assume(v1 != (0, 0) and v2 != (0, 0))
@@ -120,7 +120,7 @@ def test_spread_formula_consistency(v1, v2):
 
 
 @given(numeric_strategy, numeric_strategy, numeric_strategy)
-def test_spread_law_range(q1, q2, q3):
+def test_spread_law_range(q1, q2, q3) -> None:
     """Test that spread law returns values between 0 and 1 for valid triangles"""
     # Use positive values for quadrances
     assume(q1 > 0 and q2 > 0 and q3 > 0)
@@ -137,7 +137,7 @@ def test_spread_law_range(q1, q2, q3):
 
 
 @given(numeric_strategy, numeric_strategy, numeric_strategy)
-def test_spread_law_symmetry(q1, q2, q3):
+def test_spread_law_symmetry(q1, q2, q3) -> None:
     """Test that spread law is symmetric in first two arguments"""
     result1 = spread_law(q1, q2, q3)
     result2 = spread_law(q2, q1, q3)
@@ -180,7 +180,7 @@ def test_triple_quad_formula_range(q1, q2, s3) -> None:
 
 
 @given(numeric_strategy, numeric_strategy, spread_strategy)
-def test_triple_quad_formula_symmetry(q1, q2, s3):
+def test_triple_quad_formula_symmetry(q1, q2, s3) -> None:
     """Test that triple quad formula is symmetric in first two arguments"""
     result1 = triple_quad_formula(q1, q2, s3)
     result2 = triple_quad_formula(q2, q1, s3)
@@ -188,7 +188,7 @@ def test_triple_quad_formula_symmetry(q1, q2, s3):
 
 
 @given(numeric_strategy, numeric_strategy, spread_strategy)
-def test_triple_quad_formula_extreme_cases(q1, q2, s3):
+def test_triple_quad_formula_extreme_cases(q1, q2, s3) -> None:
     """Test triple quad formula for extreme cases"""
     assume(q1 >= 0 and q2 >= 0 and 0 <= s3 <= 1)
 
@@ -214,7 +214,7 @@ def test_triple_quad_formula_extreme_cases(q1, q2, s3):
 
 
 @given(vector_strategy, vector_strategy)
-def test_triple_quad_formula_vector_consistency(v1, v2):
+def test_triple_quad_formula_vector_consistency(v1, v2) -> None:
     """Test that triple quad formula is consistent with vector operations"""
     # Avoid zero vectors
     assume(v1 != (0, 0) and v2 != (0, 0))

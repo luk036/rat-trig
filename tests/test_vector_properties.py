@@ -26,7 +26,7 @@ vector_strategy = st.tuples(numeric_strategy, numeric_strategy)
 
 
 @given(vector_strategy, vector_strategy)
-def test_dot_product_commutative(v1, v2):
+def test_dot_product_commutative(v1, v2) -> None:
     """Test that dot product is commutative: v·w = w·v"""
     result1 = dot(v1, v2)
     result2 = dot(v2, v1)
@@ -49,7 +49,7 @@ def test_dot_product_distributive(v1, v2, v3) -> None:
 
 
 @given(vector_strategy, st.integers(min_value=1, max_value=10))
-def test_dot_product_homogeneous(v, k):
+def test_dot_product_homogeneous(v, k) -> None:
     """Test that dot product is homogeneous: (k·v)·w = k·(v·w)"""
     # Use a fixed second vector to avoid type mixing issues
     w = (1, 1) if isinstance(v[0], (int, Fraction)) else (1.0, 1.0)
@@ -64,7 +64,7 @@ def test_dot_product_homogeneous(v, k):
 
 
 @given(vector_strategy)
-def test_dot_product_positive_definite(v):
+def test_dot_product_positive_definite(v) -> None:
     """Test that dot product is positive definite: v·v ≥ 0 and v·v = 0 iff v = 0"""
     result = dot(v, v)
     assert result >= 0
@@ -87,7 +87,7 @@ def test_dot_product_positive_definite(v):
 
 
 @given(vector_strategy, vector_strategy)
-def test_cross_product_anticommutative(v1, v2):
+def test_cross_product_anticommutative(v1, v2) -> None:
     """Test that cross product is anticommutative: v×w = -(w×v)"""
     result1 = cross(v1, v2)
     result2 = cross(v2, v1)
@@ -95,14 +95,14 @@ def test_cross_product_anticommutative(v1, v2):
 
 
 @given(vector_strategy)
-def test_cross_product_parallel(v):
+def test_cross_product_parallel(v) -> None:
     """Test that cross product of parallel vectors is zero: v×v = 0"""
     result = cross(v, v)
     assert result == 0
 
 
 @given(vector_strategy, st.integers(min_value=1, max_value=10))
-def test_cross_product_homogeneous(v, k):
+def test_cross_product_homogeneous(v, k) -> None:
     """Test that cross product is homogeneous: (k·v)×w = k·(v×w)"""
     # Use a fixed second vector to avoid type mixing issues
     w = (1, 1) if isinstance(v[0], (int, Fraction)) else (1.0, 1.0)
@@ -124,7 +124,7 @@ def test_quadrance_non_negative(v) -> None:
 
 
 @given(vector_strategy)
-def test_quadrance_zero_only_for_zero_vector(v):
+def test_quadrance_zero_only_for_zero_vector(v) -> None:
     """Test that quadrance is zero only for the zero vector"""
     result = quad(v)
     # Only check equality to zero for exact types (not floats due to precision)
@@ -153,7 +153,7 @@ def test_quadrance_homogeneous(v, k) -> None:
 
 
 @given(vector_strategy, vector_strategy)
-def test_pythagorean_theorem(v1, v2):
+def test_pythagorean_theorem(v1, v2) -> None:
     """Test Pythagorean theorem: ||v||² + ||w||² = ||v + w||² - 2·v·w"""
     # This is a rearranged form of: ||v + w||² = ||v||² + ||w||² + 2·v·w
     # We need to ensure same types to avoid mixing
