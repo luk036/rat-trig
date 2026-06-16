@@ -71,7 +71,9 @@ def test_spread_range(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]) 
 
 
 @given(vector_strategy, vector_strategy)
-def test_spread_parallel_vectors(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]) -> None:
+def test_spread_parallel_vectors(
+    v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]
+) -> None:
     """Test that spread is 0 for parallel vectors"""
     # Create a parallel vector by scaling
     k = 2  # Scaling factor
@@ -92,7 +94,9 @@ def test_spread_perpendicular_vectors(v: tuple[Numeric, Numeric]) -> None:
 
 
 @given(vector_strategy, vector_strategy)
-def test_spread_symmetry(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]) -> None:
+def test_spread_symmetry(
+    v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]
+) -> None:
     """Test that spread is symmetric: spread(v1, v2) = spread(v2, v1)"""
     # Avoid zero vectors
     assume(v1 != (0, 0) and v2 != (0, 0))
@@ -103,7 +107,9 @@ def test_spread_symmetry(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric
 
 
 @given(vector_strategy, vector_strategy)
-def test_spread_formula_consistency(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]) -> None:
+def test_spread_formula_consistency(
+    v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]
+) -> None:
     """Test that spread formula is consistent with cross and quad functions"""
     # Avoid zero vectors
     assume(v1 != (0, 0) and v2 != (0, 0))
@@ -146,7 +152,9 @@ def test_spread_law_symmetry(q1: Numeric, q2: Numeric, q3: Numeric) -> None:
 
 
 @given(vector_strategy, vector_strategy)
-def test_spread_law_vector_consistency(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]) -> None:
+def test_spread_law_vector_consistency(
+    v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]
+) -> None:
     """Test that spread law is consistent with spread function for vectors"""
     # Avoid zero vectors
     assume(v1 != (0, 0) and v2 != (0, 0))
@@ -189,7 +197,9 @@ def test_triple_quad_formula_symmetry(q1: Numeric, q2: Numeric, s3: Numeric) -> 
 
 
 @given(numeric_strategy, numeric_strategy, spread_strategy)
-def test_triple_quad_formula_extreme_cases(q1: Numeric, q2: Numeric, s3: Numeric) -> None:
+def test_triple_quad_formula_extreme_cases(
+    q1: Numeric, q2: Numeric, s3: Numeric
+) -> None:
     """Test triple quad formula for extreme cases"""
     assume(q1 >= 0 and q2 >= 0 and 0 <= s3 <= 1)
 
@@ -215,7 +225,9 @@ def test_triple_quad_formula_extreme_cases(q1: Numeric, q2: Numeric, s3: Numeric
 
 
 @given(vector_strategy, vector_strategy)
-def test_triple_quad_formula_vector_consistency(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]) -> None:
+def test_triple_quad_formula_vector_consistency(
+    v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]
+) -> None:
     """Test that triple quad formula is consistent with vector operations"""
     # Avoid zero vectors
     assume(v1 != (0, 0) and v2 != (0, 0))

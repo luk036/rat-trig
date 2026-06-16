@@ -26,7 +26,9 @@ vector_strategy = st.tuples(numeric_strategy, numeric_strategy)
 
 
 @given(vector_strategy, vector_strategy)
-def test_dot_product_commutative(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]) -> None:
+def test_dot_product_commutative(
+    v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]
+) -> None:
     """Test that dot product is commutative: v·w = w·v"""
     result1 = dot(v1, v2)
     result2 = dot(v2, v1)
@@ -34,7 +36,11 @@ def test_dot_product_commutative(v1: tuple[Numeric, Numeric], v2: tuple[Numeric,
 
 
 @given(vector_strategy, vector_strategy, vector_strategy)
-def test_dot_product_distributive(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric], v3: tuple[Numeric, Numeric]) -> None:
+def test_dot_product_distributive(
+    v1: tuple[Numeric, Numeric],
+    v2: tuple[Numeric, Numeric],
+    v3: tuple[Numeric, Numeric],
+) -> None:
     """Test that dot product is distributive: v·(w + u) = v·w + v·u"""
     # For property testing, we need to ensure the same type
     if isinstance(v1[0], type(v2[0])) and isinstance(v2[0], type(v3[0])):
@@ -87,7 +93,9 @@ def test_dot_product_positive_definite(v: tuple[Numeric, Numeric]) -> None:
 
 
 @given(vector_strategy, vector_strategy)
-def test_cross_product_anticommutative(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]) -> None:
+def test_cross_product_anticommutative(
+    v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]
+) -> None:
     """Test that cross product is anticommutative: v×w = -(w×v)"""
     result1 = cross(v1, v2)
     result2 = cross(v2, v1)
@@ -153,7 +161,9 @@ def test_quadrance_homogeneous(v: tuple[Numeric, Numeric], k: int) -> None:
 
 
 @given(vector_strategy, vector_strategy)
-def test_pythagorean_theorem(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]) -> None:
+def test_pythagorean_theorem(
+    v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]
+) -> None:
     """Test Pythagorean theorem: ||v||² + ||w||² = ||v + w||² - 2·v·w"""
     # This is a rearranged form of: ||v + w||² = ||v||² + ||w||² + 2·v·w
     # We need to ensure same types to avoid mixing
@@ -169,7 +179,9 @@ def test_pythagorean_theorem(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Num
 
 
 @given(vector_strategy, vector_strategy)
-def test_lagrange_identity(v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]) -> None:
+def test_lagrange_identity(
+    v1: tuple[Numeric, Numeric], v2: tuple[Numeric, Numeric]
+) -> None:
     """Test Lagrange's identity: (v·w)² + (v×w)² = ||v||²·||w||²"""
     # This identity holds in 2D
     dot_sq: Numeric = dot(v1, v2) ** 2  # type: ignore[assignment]
