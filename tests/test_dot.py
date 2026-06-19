@@ -10,11 +10,6 @@ def test_dot() -> None:
     v_2_int1 = [3, 4]
     assert dot(v_1_int1, v_2_int1) == 11
 
-    # Test with float vectors
-    v_1_float = [1.0, 2.0]
-    v_2_float = [3.0, 4.0]
-    assert dot(v_1_float, v_2_float) == 11.0
-
     # Test with Fraction vectors
     v_1_frac = [Fraction(1, 2), Fraction(1, 4)]
     v_2_frac = [Fraction(1, 6), Fraction(1, 8)]

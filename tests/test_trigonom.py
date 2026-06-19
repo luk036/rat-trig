@@ -11,12 +11,6 @@ def test_archimedes() -> None:
     q_3_int = 6
     assert archimedes(q_1_int, q_2_int, q_3_int) == 32
 
-    # Test with floats
-    q_1_float = 2.0
-    q_2_float = 4.0
-    q_3_float = 6.0
-    assert archimedes(q_1_float, q_2_float, q_3_float) == 32
-
     # Test with fractions
     q_1_frac = Fraction(1, 2)
     q_2_frac = Fraction(1, 4)

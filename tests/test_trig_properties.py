@@ -6,6 +6,8 @@ and triple_quad_formula functions from rat_trig.trigonom module. These tests
 verify mathematical properties that should hold for all valid inputs.
 """
 
+from fractions import Fraction
+
 import pytest
 from hypothesis import assume, given
 from hypothesis import strategies as st
@@ -20,21 +22,17 @@ from rat_trig.trigonom import (
     triple_quad_formula,
 )
 
-# Strategy for generating numeric values (int, Fraction, float)
+# Strategy for generating numeric values (int, Fraction)
 numeric_strategy = st.one_of(
     st.integers(min_value=1, max_value=100),  # Use positive values for quadrances
     st.fractions(min_value=1, max_value=100, max_denominator=100),
-    st.floats(min_value=0.1, max_value=100.0, allow_nan=False, allow_infinity=False),
 )
 
 # Strategy for generating 2D vectors with numeric components
 vector_strategy = st.tuples(numeric_strategy, numeric_strategy)
 
 # Strategy for spread values (between 0 and 1)
-spread_strategy = st.one_of(
-    st.fractions(min_value=0, max_value=1, max_denominator=100),
-    st.floats(min_value=0.0, max_value=1.0, allow_nan=False, allow_infinity=False),
-)
+spread_strategy = st.fractions(min_value=0, max_value=1, max_denominator=100)
 
 
 @given(numeric_strategy, numeric_strategy, numeric_strategy)
@@ -53,8 +51,8 @@ def test_archimedes_non_negative(q1: Numeric, q2: Numeric, q3: Numeric) -> None:
     # We'll test this property for cases where it holds
     assume(q1 > 0 and q2 > 0 and q3 > 0)
     assume(
-        abs(q1 + q2 - q3) < 2 * (q1 * q2) ** 0.5
-    )  # Triangle inequality for quadrances
+        (q1 + q2 - q3) ** 2 < 4 * q1 * q2
+    )  # Triangle inequality for quadrances (squared form)
 
     result = archimedes(q1, q2, q3)
     assert result >= 0
@@ -117,13 +115,9 @@ def test_spread_formula_consistency(
     spread_result = spread(v1, v2)
     cross_sq = cross(v1, v2) ** 2
     quad_product = quad(v1) * quad(v2)
-    expected = cross_sq / quad_product
+    expected = Fraction(cross_sq, quad_product)
 
-    # Allow for floating point precision issues
-    if isinstance(spread_result, float):
-        assert abs(spread_result - expected) < 1e-10
-    else:
-        assert spread_result == expected
+    assert spread_result == expected
 
 
 @given(numeric_strategy, numeric_strategy, numeric_strategy)
@@ -136,8 +130,8 @@ def test_spread_law_range(q1: Numeric, q2: Numeric, q3: Numeric) -> None:
     # In terms of quadrances, this means: sqrt(q1) + sqrt(q2) > sqrt(q3)
     # We'll test this property for cases where it holds
     assume(
-        abs(q1 + q2 - q3) < 2 * (q1 * q2) ** 0.5
-    )  # Triangle inequality for quadrances
+        (q1 + q2 - q3) ** 2 < 4 * q1 * q2
+    )  # Triangle inequality for quadrances (squared form)
 
     result = spread_law(q1, q2, q3)
     assert 0 <= result <= 1
@@ -169,23 +163,17 @@ def test_spread_law_vector_consistency(
     spread_direct = spread(v1, v2)
     spread_from_law = spread_law(q1, q2, q3)
 
-    # Allow for floating point precision issues
-    if isinstance(spread_direct, float) or isinstance(spread_from_law, float):
-        assert abs(spread_direct - spread_from_law) < 1e-10  # type: ignore
-    else:
-        assert spread_direct == spread_from_law  # type: ignore
+    assert spread_direct == spread_from_law
 
 
 @given(numeric_strategy, numeric_strategy, spread_strategy)
 def test_triple_quad_formula_range(q1: Numeric, q2: Numeric, s3: Numeric) -> None:
     """Test that triple quad formula returns reasonable values"""
-    from fractions import Fraction
-
     assume(q1 >= 0 and q2 >= 0 and 0 <= s3 <= 1)
 
-    result: int | Fraction | float = triple_quad_formula(q1, q2, s3)  # type: ignore
+    result = triple_quad_formula(q1, q2, s3)
     # The result should be non-negative for valid inputs
-    assert result >= 0  # type: ignore
+    assert result >= 0
 
 
 @given(numeric_strategy, numeric_strategy, spread_strategy)
@@ -207,21 +195,13 @@ def test_triple_quad_formula_extreme_cases(
     if s3 == 0:
         result = triple_quad_formula(q1, q2, s3)
         expected = (q1 - q2) ** 2
-        # Allow for floating point precision issues
-        if isinstance(result, float) or isinstance(expected, float):
-            assert abs(result - expected) < 1e-10
-        else:
-            assert result == expected
+        assert result == expected
 
     # When spread is 1, result should be (q1 + q2)^2
     if s3 == 1:
         result = triple_quad_formula(q1, q2, s3)
         expected = (q1 + q2) ** 2
-        # Allow for floating point precision issues
-        if isinstance(result, float) or isinstance(expected, float):
-            assert abs(result - expected) < 1e-10
-        else:
-            assert result == expected
+        assert result == expected
 
 
 @given(vector_strategy, vector_strategy)
@@ -240,11 +220,7 @@ def test_triple_quad_formula_vector_consistency(
     # According to the formula: (q1 + q2)^2 - 4*q1*q2*(1-s3)
     expected = (q1 + q2) ** 2 - 4 * q1 * q2 * (1 - s3)
 
-    # Allow for floating point precision issues
-    if isinstance(result, float) or isinstance(expected, float):
-        assert abs(result - expected) < 1e-10
-    else:
-        assert result == expected
+    assert result == expected
 
 
 if __name__ == "__main__":

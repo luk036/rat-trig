@@ -40,11 +40,11 @@ straightforward and intuitive subject to understand and work with.
 from fractions import Fraction
 from typing import Sequence, TypeVar, Union
 
-NumType = TypeVar("NumType", int, Fraction, float)
-"""Type variable for numeric types: int, Fraction, or float."""
+NumType = TypeVar("NumType", int, Fraction)
+"""Type variable for numeric types: int or Fraction."""
 
-Numeric = Union[int, Fraction, float]
-"""Type alias for numeric types: int, Fraction, or float."""
+Numeric = Union[int, Fraction]
+"""Type alias for numeric types: int or Fraction."""
 
 
 def archimedes(q_1: Numeric, q_2: Numeric, q_3: Numeric) -> Numeric:
@@ -94,9 +94,9 @@ def cross(v_1: Sequence[Numeric], v_2: Sequence[Numeric]) -> Numeric:
     r"""
     The `cross` function calculates the cross product of two vectors `v_1` and `v_2`.
 
-    :param v_1: A sequence of two numbers (integers, fractions, or floats).
+    :param v_1: A sequence of two numbers (integers or fractions).
     :type v_1: Sequence[Numeric]
-    :param v_2: A sequence of two numbers (integers, fractions, or floats).
+    :param v_2: A sequence of two numbers (integers or fractions).
     :type v_2: Sequence[Numeric]
     :return: The cross product of the two vectors.
     :rtype: Numeric
@@ -127,9 +127,9 @@ def dot(v_1: Sequence[Numeric], v_2: Sequence[Numeric]) -> Numeric:
     r"""
     The `dot` function calculates the dot product of two vectors `v_1` and `v_2`.
 
-    :param v_1: A sequence of two numbers (integers, fractions, or floats).
+    :param v_1: A sequence of two numbers (integers or fractions).
     :type v_1: Sequence[Numeric]
-    :param v_2: A sequence of two numbers (integers, fractions, or floats).
+    :param v_2: A sequence of two numbers (integers or fractions).
     :type v_2: Sequence[Numeric]
     :return: The dot product of the two vectors.
     :rtype: Numeric
@@ -162,7 +162,7 @@ def quad(vector: Sequence[Numeric]) -> Numeric:
     r"""
     The `quad` function calculates the quadrance of a vector `vector`.
 
-    :param vector: A sequence of two numbers (integers, fractions, or floats).
+    :param vector: A sequence of two numbers (integers or fractions).
     :type vector: Sequence[Numeric]
     :return: The quadrance of the vector.
     :rtype: Numeric
@@ -196,9 +196,9 @@ def spread(v_1: Sequence[Numeric], v_2: Sequence[Numeric]) -> Numeric:
     The spread is the square of the cross product divided by the product of the quadrances.
     It represents the square of the sine of the angle between the vectors.
 
-    :param v_1: A sequence of two numbers (integers, fractions, or floats).
+    :param v_1: A sequence of two numbers (integers or fractions).
     :type v_1: Sequence[Numeric]
-    :param v_2: A sequence of two numbers (integers, fractions, or floats).
+    :param v_2: A sequence of two numbers (integers or fractions).
     :type v_2: Sequence[Numeric]
     :return: The spread between the two vectors.
     :rtype: Numeric
@@ -213,7 +213,7 @@ def spread(v_1: Sequence[Numeric], v_2: Sequence[Numeric]) -> Numeric:
     cross_product = cross(v_1, v_2)
     quad_1 = quad(v_1)
     quad_2 = quad(v_2)
-    return (cross_product * cross_product) / (quad_1 * quad_2)
+    return Fraction(cross_product * cross_product, quad_1 * quad_2)
 
 
 def spread_law(q_1: Numeric, q_2: Numeric, q_3: Numeric) -> Numeric:
@@ -233,15 +233,16 @@ def spread_law(q_1: Numeric, q_2: Numeric, q_3: Numeric) -> Numeric:
     :rtype: Numeric
 
     Example:
+        >>> from fractions import Fraction
         >>> q_1 = 5
         >>> q_2 = 25
         >>> q_3 = 20
         >>> spread_law(q_1, q_2, q_3)
-        0.8
+        Fraction(4, 5)
     """
     numerator = archimedes(q_1, q_2, q_3)  # 4*q_1*q_2 - (q_1 + q_2 - q_3)^2
     denominator = 4 * q_1 * q_2
-    return numerator / denominator
+    return Fraction(numerator, denominator)
 
 
 def triple_quad_formula(q_1: Numeric, q_2: Numeric, s_3: Numeric) -> Numeric:

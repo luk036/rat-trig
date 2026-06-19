@@ -9,10 +9,6 @@ def test_quad() -> None:
     vec_int = [3, 4]
     assert quad(vec_int) == 25
 
-    # Test with float vector
-    vec_float = [3.0, 4.0]
-    assert quad(vec_float) == 25.0
-
     # Test with Fraction vector
     vec_frac = [Fraction(3, 5), Fraction(4, 5)]
     assert quad(vec_frac) == 1

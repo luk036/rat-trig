@@ -1,3 +1,5 @@
+from fractions import Fraction
+
 from rat_trig.trigonom import spread_law
 
 
@@ -6,7 +8,7 @@ def test_spread_law() -> None:
     q_1 = 5
     q_2 = 25
     q_3 = 20
-    assert spread_law(q_1, q_2, q_3) == 0.8
+    assert spread_law(q_1, q_2, q_3) == Fraction(4, 5)
 
     q_1 = 1
     q_2 = 1
