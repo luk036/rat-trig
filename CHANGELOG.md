@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 0.4 (2026-10-09)
+
+### Bug Fixes
+- **mypy config**: Removed the duplicate `ignore_missing_imports` entry from `mypy.ini`. (#a50da4a)
+
+### Code Cleanup
+- **Removed dead `skeleton.py`**: Deleted the leftover PyScaffold `skeleton.py` (158 lines). (#74e1ead)
+
 ## Version 0.3 (2026-07-16)
 
 ### Testing & Code Quality
